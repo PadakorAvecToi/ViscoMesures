@@ -20,6 +20,3 @@ while True:
         break
     else:
         print ("Erreur")
-
-
-
