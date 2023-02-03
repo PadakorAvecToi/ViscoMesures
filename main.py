@@ -14,7 +14,7 @@ while True:
     elif choice == 2:
         print(x)
     elif choice == 3:
-        y = len(x)     #La fonction len va permettre d'afficher la longueur de la cahine de caractère
+        y = len(x)     #La fonction len va permettre d'afficher la longueur de la chaine de caractère
         print (y)
     elif choice == 4:
         break
