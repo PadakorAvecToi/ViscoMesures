@@ -12,8 +12,8 @@ window.config(background="#304562")
 
 #Création d'une image
 
-width = 100
-height = 100
+width = 300
+height = 300
 image = PhotoImage(file="logouppa.png")
 canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highlightthickness=0)
 canvas.create_image(width/2, height/2, image=image)
