@@ -16,7 +16,7 @@ width = 2560
 height = 966
 image = PhotoImage(file="logouppa.png").subsample(5)
 canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highlightthickness=0)
-canvas.create_image(width/60, height/30, image=image)
+canvas.create_image(width/50, height/30, image=image)
 canvas.pack(anchor='nw')
 
 #Création d'un boutton
