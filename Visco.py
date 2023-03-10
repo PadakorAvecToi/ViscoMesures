@@ -11,7 +11,7 @@ canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highligh
 canvas.create_image(-200, -60, anchor=NW, image=image)
 
 
-<<<<<<< HEAD
+
 # création des boutons
 def open_tab(tab_num):
     # fonction pour ouvrir une nouvelle page en fonction du numéro de l'onglet
@@ -25,8 +25,8 @@ Button(window, text="Onglet 4", font=("Courier", 15), fg='#B2BE12', bg='#233448'
 Button(window, text="Onglet 5", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(5)).grid(row=4, column=0, sticky="nsew", padx=10, pady=10)
 Button(window, text="Onglet 6", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(6)).grid(row=5, column=0, sticky="nsew", padx=10, pady=10)
 Button(window, text="Onglet 7", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(7)).grid(row=6, column=0, sticky="nsew", padx=10, pady=10)
-=======
->>>>>>> 9bd43a48e22994dcb6c98be02e609d9a6780fc42
+
+
 
 
 
