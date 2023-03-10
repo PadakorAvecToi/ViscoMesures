@@ -1,22 +1,63 @@
-def menu():
-    print ("1: Ecrivez une phrase")
-    print ("2: Afficher la phrase")
-    print ("3: Taille en caractere de la phrase")
-    print ("4: Exit")
+from tkinter import *
+from tkinter import ttk
 
-    choice = int(input("Entrez votre choix: "))
-    return choice
+# création de la fenêtre
+window = Tk()
 
-while True:
-    choice = menu()
-    if choice == 1:
-        x = (input("Entrez une phrase: "))
-    elif choice == 2:
-        print(x)
-    elif choice == 3:
-        y = len(x)
-        print (y)
-    elif choice == 4:
-        break
-    else:
-        print ("Erreur")
+# création du gestionnaire d'onglets
+notebook = ttk.Notebook(window)
+
+# création des onglets
+tab1 = Frame(notebook)
+tab2 = Frame(notebook)
+tab3 = Frame(notebook)
+tab4 = Frame(notebook)
+tab5 = Frame(notebook)
+tab6 = Frame(notebook)
+tab7 = Frame(notebook)
+
+# ajout du texte dans les onglets
+Label(tab1, text="Contenu de l'onglet 1").pack(pady=20)
+Label(tab2, text="Contenu de l'onglet 2").pack(pady=20)
+Label(tab3, text="Contenu de l'onglet 3").pack(pady=20)
+Label(tab4, text="Contenu de l'onglet 4").pack(pady=20)
+Label(tab5, text="Contenu de l'onglet 5").pack(pady=20)
+Label(tab6, text="Contenu de l'onglet 6").pack(pady=20)
+Label(tab7, text="Contenu de l'onglet 7").pack(pady=20)
+
+# ajout des onglets au gestionnaire d'onglets
+notebook.add(tab1, text="Onglet 1")
+notebook.add(tab2, text="Onglet 2")
+notebook.add(tab3, text="Onglet 3")
+notebook.add(tab4, text="Onglet 4")
+notebook.add(tab5, text="Onglet 5")
+notebook.add(tab6, text="Onglet 6")
+notebook.add(tab7, text="Onglet 7")
+
+# placement des onglets dans une colonne
+notebook.grid(row=0, column=0, rowspan=7)
+
+# création d'une image
+width = 2560
+height = 966
+image = PhotoImage(file="logouppa.png").subsample(5)
+canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highlightthickness=0)
+canvas.create_image(-200, -60, anchor=NW, image=image)
+
+# placement du canvas en-dessous des onglets
+canvas.grid(row=7, column=0)
+
+# création d'un bouton
+premier_bouton = Button(text="test du bouton", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0)
+premier_bouton.pack()
+premier_bouton.place(x=10, y=100)
+
+# modifications de la fenêtre
+window.title("Banc de Viscosité")
+window.geometry("1080x720")
+window.minsize(1080, 720)
+window.iconbitmap("uppa.ico")
+window.config(background="#304562")
+
+# afficher la fenêtre
+window.mainloop()
