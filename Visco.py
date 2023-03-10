@@ -7,13 +7,17 @@ window = Tk()
 
 # création des frames
 framelogo=ttk.Frame(window)
-framelogo.place(x=800, y=1500)
+framelogo.place(x=-130, y=-40)
 
 #insertion du logo
-logo= ImageTk.PhotoImage(Image.open("logouppa.png"))
+logo= Image.open("logouppa.png")
+logo_resize = logo.resize((350, 150), Image.ANTIALIAS)
+
+#Créaton de l'image
+imglogo= ImageTk.PhotoImage(logo_resize)
 
 #création du label pour le logo
-labellogo = Label(window, image=logo)
+labellogo = Label(framelogo, image=imglogo, background="#304562")
 labellogo.pack()
 
 # modifications de la fenêtre
@@ -25,4 +29,5 @@ window.config(background="#304562")
 
 # afficher la fenêtre
 window.mainloop()
+
 
