@@ -2,7 +2,7 @@ import serial
 
 # Configuration de la connexion série
 ser = serial.Serial(
-    port='COM1', # port COM utilisé par le détecteur synchrone
+    port='COM4', # port COM utilisé par le détecteur synchrone
     baudrate=9600, # vitesse de transmission
     parity=serial.PARITY_NONE, # pas de bit de parité
     stopbits=serial.STOPBITS_ONE, # un bit d'arrêt
