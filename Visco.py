@@ -4,18 +4,38 @@ from tkinter import ttk
 #création de la fenètre
 window = Tk()
 
-#création d'un onglet
-#notebook = ttk.Notebook(window)
-#tab1 = Frame(notebook, bg="red")
-#tab2 = Frame(notebook, bg="green")
-#notebook.add(tab1, text="Onglet 1")
-#notebook.add(tab2, text="Onglet 2")
-#notebook.pack(expand=1, fill="both")
+#création du gestionnaire d'onglets
+notebook = ttk.Notebook(window)
 
-#Ajouter des labels aux onglets
-#Label(tab1, text="Contenu de l'onglet 1").pack(padx=10, pady=10)
-#Label(tab2, text="Contenu de l'onglet 2").pack(padx=10, pady=10)
+# création des onglets
+tab1 = Frame(notebook)
+tab2 = Frame(notebook)
+tab3 = Frame(notebook)
+tab4 = Frame(notebook)
+tab5 = Frame(notebook)
+tab6 = Frame(notebook)
+tab7 = Frame(notebook)
 
+# ajout du texte dans les onglets
+Label(tab1, text="Contenu de l'onglet 1").pack(pady=20)
+Label(tab2, text="Contenu de l'onglet 2").pack(pady=20)
+Label(tab3, text="Contenu de l'onglet 3").pack(pady=20)
+Label(tab4, text="Contenu de l'onglet 4").pack(pady=20)
+Label(tab5, text="Contenu de l'onglet 5").pack(pady=20)
+Label(tab6, text="Contenu de l'onglet 6").pack(pady=20)
+Label(tab7, text="Contenu de l'onglet 7").pack(pady=20)
+
+# ajout des onglets au gestionnaire d'onglets
+notebook.add(tab1, text="Onglet 1")
+notebook.add(tab2, text="Onglet 2")
+notebook.add(tab3, text="Onglet 3")
+notebook.add(tab4, text="Onglet 4")
+notebook.add(tab5, text="Onglet 5")
+notebook.add(tab6, text="Onglet 6")
+notebook.add(tab7, text="Onglet 7")
+
+# placement des onglets dans une colonne
+notebook.grid(row=0, column=0, rowspan=7)
 
 #Modifications de la fenètre
 window.title("Banc de Viscosité")
