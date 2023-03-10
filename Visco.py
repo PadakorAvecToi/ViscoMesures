@@ -12,6 +12,7 @@ canvas.create_image(-200, -60, anchor=NW, image=image)
 
 
 
+
 # création des boutons
 def open_tab(tab_num):
     # fonction pour ouvrir une nouvelle page en fonction du numéro de l'onglet
@@ -29,6 +30,10 @@ Button(window, text="Onglet 7", font=("Courier", 15), fg='#B2BE12', bg='#233448'
 
 
 
+
+
+# placement du canvas en-dessous des boutons
+canvas.grid(row=0, column=1, rowspan=7)
 
 
 # modifications de la fenêtre
