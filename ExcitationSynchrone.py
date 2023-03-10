@@ -13,3 +13,4 @@ ser.write(b'EXCITE 500\r\n') # Configure
 
 
 
+ 
