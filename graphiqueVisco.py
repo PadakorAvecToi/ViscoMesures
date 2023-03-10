@@ -43,11 +43,11 @@ x = []
 y = []
 
 # Parcourez chaque ligne du fichier TXT
-for line in data:
+for line in data[1:]:
     # Séparez les valeurs x et y en utilisant la virgule comme séparateur
-    split_line = line.split(',')
-    x.append(int(split_line[0]))
-    y.append(int(split_line[1]))
+    split_line = line.split('\t')
+    x.append(float(split_line[0]))
+    y.append(float(split_line[3]))
 
 # Tracez les données dans un graphique
 plt.plot(x, y)
@@ -60,7 +60,7 @@ plt.title("Graphique Réel")
 # Affichez le graphique
 plt.show()
 
-
+"""
 # Ouvrez le fichier TXT contenant les données
 with open('ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
     data = f.read().splitlines()
@@ -86,3 +86,4 @@ plt.title("Graphique Imaginaire")
 
 # Affichez le graphique
 plt.show()
+"""
