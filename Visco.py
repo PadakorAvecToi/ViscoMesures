@@ -10,7 +10,8 @@ image = PhotoImage(file="logouppa.png").subsample(5)
 canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highlightthickness=0)
 canvas.create_image(-200, -60, anchor=NW, image=image)
 
-
+# placement du canvas en-dessous des boutons
+canvas.grid(row=0, column=1, rowspan=7)
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
