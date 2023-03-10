@@ -19,7 +19,7 @@ def open_tab(tab_num):
     page = Toplevel(window)
     Label(page, text=f"Contenu de l'onglet {tab_num}").pack(pady=20)
 
-Button(window, text="Onglet 1", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(1)).grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+Button(window, text="Onglet 1", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, width=20,height=1, command=lambda: open_tab(1)).grid(row=0, column=0, sticky="nsew", padx=10, pady=5)
 Button(window, text="Onglet 2", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(2)).grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 Button(window, text="Onglet 3", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(3)).grid(row=2, column=0, sticky="nsew", padx=10, pady=10)
 Button(window, text="Onglet 4", font=("Courier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0, command=lambda: open_tab(4)).grid(row=3, column=0, sticky="nsew", padx=10, pady=10)
