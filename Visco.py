@@ -5,26 +5,17 @@ from tkinter import ttk
 window = Tk()
 
 #création d'un onglet
-notebook = ttk.Notebook(window)
-tab1 = Frame(notebook, bg="red")
-tab2 = Frame(notebook, bg="green")
-notebook.add(tab1, text="Onglet 1")
-notebook.add(tab2, text="Onglet 2")
-notebook.pack(expand=1, fill="both")
+#notebook = ttk.Notebook(window)
+#tab1 = Frame(notebook, bg="red")
+#tab2 = Frame(notebook, bg="green")
+#notebook.add(tab1, text="Onglet 1")
+#notebook.add(tab2, text="Onglet 2")
+#notebook.pack(expand=1, fill="both")
 
 #Ajouter des labels aux onglets
-Label(tab1, text="Contenu de l'onglet 1").pack(padx=10, pady=10)
-Label(tab2, text="Contenu de l'onglet 2").pack(padx=10, pady=10)
+#Label(tab1, text="Contenu de l'onglet 1").pack(padx=10, pady=10)
+#Label(tab2, text="Contenu de l'onglet 2").pack(padx=10, pady=10)
 
-# Créez un bouton pour cacher les onglets
-hide_button = Button(window, text="Cacher les onglets",
-                     command=lambda: notebook.hide())
-hide_button.pack(pady=10)
-
-# Créez un bouton pour afficher les onglets
-show_button = Button(window, text="Afficher les onglets",
-                     command=lambda: notebook.show(notebook.select()))
-show_button.pack(pady=10)
 
 #Modifications de la fenètre
 window.title("Banc de Viscosité")
@@ -38,8 +29,8 @@ width = 2560
 height = 966
 image = PhotoImage(file="logouppa.png").subsample(5)
 canvas = Canvas(window, width=width, height=height, bg='#304562', bd=0, highlightthickness=0)
-canvas.create_image(width/50, height/30, image=image)
-canvas.pack(anchor='nw')
+canvas.create_image(-200, -60, anchor=NW, image=image)
+canvas.pack()
 
 #Création d'un boutton
 Premier_boutton = Button(text="test du boutton", font=("Courrier", 15), fg='#B2BE12', bg='#233448', bd=0, highlightthickness=0)
