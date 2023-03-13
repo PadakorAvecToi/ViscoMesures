@@ -60,10 +60,14 @@ def plot_graphs():
     canvas1 = FigureCanvasTkAgg(fig1, master=framePlacement1)
     canvas1.draw()
     canvas1.get_tk_widget().pack(side=LEFT, padx=20)
+    canvas1.get_tk_widget().configure(background='#304562')
+
 
     canvas2 = FigureCanvasTkAgg(fig2, master=framePlacement2)
     canvas2.draw()
     canvas2.get_tk_widget().pack(side=LEFT, padx=20)
+    canvas2.get_tk_widget().configure(background='#304562')
+
 
     # Créez un bouton pour cacher les graphiques
     hide_button = Button(window, text="Cacher les graphiques", command=lambda: hide_graphs(canvas1, canvas2, hide_button))
