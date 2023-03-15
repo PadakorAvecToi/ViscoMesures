@@ -66,17 +66,6 @@ def plot_graphs():
     canvas2.draw()
     canvas2.get_tk_widget().pack(side=LEFT, padx=20)
 
-
-    # Créez un bouton pour cacher les graphiques
-    hide_button = Button(window, text="Cacher les graphiques", command=lambda: hide_graphs(canvas1, canvas2, hide_button))
-    hide_button.pack(side=LEFT, padx=10)
-
-def hide_graphs(canvas1, canvas2, button):
-    # Supprimez les widgets tkinter des graphiques et le bouton
-    canvas1.get_tk_widget().pack_forget()
-    canvas2.get_tk_widget().pack_forget()
-    button.pack_forget()
-
 # création du bouton pour afficher les graphiques
 show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
 show_button.pack()
