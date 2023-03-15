@@ -82,7 +82,7 @@ def plot_graphs():
     ax2.legend(['Données imaginaires'], loc='upper right', fontsize=12)
 
     # Modifier la couleur de fond de la figure
-    fig.patch.set_facecolor('#f2f2f2')
+    fig.patch.set_facecolor('#233448')
 
     # Modifier les marges autour des sous-graphiques
     plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
