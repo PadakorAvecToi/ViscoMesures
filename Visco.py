@@ -62,7 +62,7 @@ def plot_graphs():
     ax2.plot(w, z, color='red', linewidth=2)
 
     # Ajoutez des étiquettes pour les axes X et Y et un titre pour chaque sous-graphique
-    ax1.set_xlabel("Axe X", fontsize=12)
+    ax1.set_xlabel("Axe X", fontsize=12, fg="#B1BD11")
     ax1.set_ylabel("Axe Y", fontsize=12)
     ax1.set_title("Graphique Réel", fontsize=14)
     ax2.set_xlabel("Axe X", fontsize=12)
