@@ -1,29 +1,26 @@
 import serial
 
-# Configuration de la connexion série
+# Configuration des paramètres de communication RS232
 ser = serial.Serial(
-    port='COM5', # port COM utilisé par le détecteur synchrone
-    baudrate=9600, # vitesse de transmission
-    parity=serial.PARITY_NONE, # pas de bit de parité
-    stopbits=serial.STOPBITS_ONE, # un bit d'arrêt
-    bytesize=serial.EIGHTBITS # huit bits de données
+    port='COM1',  # Modifier le port de communication en fonction de votre configuration
+    baudrate=19200,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=1
 )
 
-# Ouverture de la connexion série
-ser.open()
+# Ouverture de la connexion RS232
+ser.isOpen()
+print("Connexion établie avec succés avec le détecteur synchrone SRS SR850")
 
-# Vérification que la connexion est ouverte
-if ser.is_open:
-    print("Connexion RS232 établie avec succès.")
+# Envoi de commandes au détecteur synchrone
+ser.write(b'FREQ?\r\n')  # Demande de la fréquence de mesure actuelle
+response = ser.readline()
+print(response.decode('ascii'))  # Affichage de la réponse du détecteur synchrone
 
-# Envoi de données au détecteur synchrone
-ser.write(b'Ma commande\r\n') # envoyer une commande au détecteur synchrone
-
-# Lecture de données provenant du détecteur synchrone
-data = ser.readline() # lire une ligne de données provenant du détecteur synchrone
-print("Données reçues : ", data)
-
-# Fermeture de la connexion série
+# Fermeture de la connexion RS232
 ser.close()
+
 
 
