@@ -3,6 +3,8 @@ from tkinter import ttk
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import win32com.client
+from tkinter import messagebox
 
 # création de la fenêtre
 window = Tk()
@@ -19,6 +21,9 @@ framePlacement1.place(x=500, y=100)
 
 framePlacement2 = ttk.Frame(window)
 framePlacement2.place(x=1000, y=100)
+
+frameVision = ttk.Frame(window)
+frameVision.place(x=1650, y=40)
 
 #insertion du logo
 logo = Image.open("logouppa.png")
@@ -53,6 +58,7 @@ def plot_graphs():
         y.append(float(split_line[3]))
         w.append(float(split_line[1]))
         z.append(float(split_line[4]))
+
 
     # Créez une figure avec deux sous-graphiques
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
@@ -96,9 +102,59 @@ def plot_graphs():
 
 #====================================================================================================
 
+def open_powerpoint():
+    # Chemin d'accès et nom de fichier PowerPoint
+    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\test.pptx"
+
+    # Créer une instance de PowerPoint
+    powerpoint = win32com.client.Dispatch("PowerPoint.Application")
+
+    try:
+        # Ouvrir le fichier PowerPoint
+        presentation = powerpoint.Presentations.Open(powerpoint_file)
+
+        # Afficher la présentation en mode diaporama
+        presentation.SlideShowSettings.Run()
+    except:
+        # Si une erreur se produit, afficher un message d'erreur
+        messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
+
+    # Fermer PowerPoint
+    #powerpoint.Quit()
+
+#====================================================================================================
+
 # création du bouton pour afficher les graphiques
+
 show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
 show_button.pack()
+
+BUTTON_WIDTH = 25
+
+show_button1 = Button(frameGraphique1, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button1.pack()
+
+show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button2.pack()
+
+show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button3.pack()
+
+show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button4.pack()
+
+show_button5 = Button(frameGraphique5, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button5.pack()
+
+show_button6 = Button(frameGraphique6, text="Calibration", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button6.pack()
+
+show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button7.pack()
+
+buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse.pack()
+
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
@@ -106,6 +162,7 @@ window.geometry("1920x1080")
 window.minsize(1080, 720)
 window.iconbitmap("uppa.ico")
 window.config(background="#304562")
+
 
 # afficher la fenêtre
 window.mainloop()
