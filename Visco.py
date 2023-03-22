@@ -79,7 +79,7 @@ def plot_graphs():
     window.update()
 
 # création du bouton pour afficher les graphiques
-show_button = Tk.Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
+show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
 show_button.pack()
 
 # modifications de la fenêtre
