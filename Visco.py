@@ -3,6 +3,8 @@ from tkinter import ttk
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import win32com.client
+from tkinter import messagebox
 
 # création de la fenêtre
 window = Tk()
@@ -116,6 +118,26 @@ def plot_graphs():
 
 #====================================================================================================
 
+def open_powerpoint():
+    # Chemin d'accès et nom de fichier PowerPoint
+    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures"
+
+    # Créer une instance de PowerPoint
+    powerpoint = win32com.client.Dispatch("PowerPoint.Application")
+
+    try:
+        # Ouvrir le fichier PowerPoint
+        presentation = powerpoint.Presentations.Open(powerpoint_file)
+
+        # Afficher la présentation en mode diaporama
+        presentation.SlideShowSettings.Run()
+    except:
+        # Si une erreur se produit, afficher un message d'erreur
+        messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
+
+    # Fermer PowerPoint
+    powerpoint.Quit()
+
 #====================================================================================================
 
 # création du bouton pour afficher les graphiques
@@ -142,7 +164,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 
