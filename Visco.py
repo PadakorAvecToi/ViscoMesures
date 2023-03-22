@@ -56,8 +56,8 @@ def plot_graphs():
     ax2.grid(True)
 
     # Modifier l'apparence de la grille
-    ax1.grid(color='gray', linestyle='-', linewidth=0.7)
-    ax2.grid(color='gray', linestyle='-', linewidth=0.7)
+    ax1.grid(color='gray', linestyle='-', linewidth=0.5)
+    ax2.grid(color='gray', linestyle='-', linewidth=0.5)
 
     # Ajouter une légende aux sous-graphiques
     ax1.legend(['Données réelles'], loc='upper right', fontsize=12)
