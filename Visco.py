@@ -11,8 +11,26 @@ window = Tk()
 framelogo = ttk.Frame(window)
 framelogo.place(x=-180, y=-50)
 
-frameGraphique = ttk.Frame(window)
-frameGraphique.place(x=20, y=80)
+frameGraphique1 = ttk.Frame(window)
+frameGraphique1.place(x=20, y=80)
+
+frameGraphique2 = ttk.Frame(window)
+frameGraphique2.place(x=20, y=160)
+
+frameGraphique3 = ttk.Frame(window)
+frameGraphique3.place(x=20, y=240)
+
+frameGraphique4 = ttk.Frame(window)
+frameGraphique4.place(x=20, y=320)
+
+frameGraphique5 = ttk.Frame(window)
+frameGraphique5.place(x=20, y=400)
+
+frameGraphique6 = ttk.Frame(window)
+frameGraphique6.place(x=20, y=480)
+
+frameGraphique7 = ttk.Frame(window)
+frameGraphique7.place(x=20, y=560)
 
 framePlacement1 = ttk.Frame(window)
 framePlacement1.place(x=500, y=100)
@@ -95,8 +113,29 @@ def plot_graphs():
 #====================================================================================================
 
 # création du bouton pour afficher les graphiques
-show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
-show_button.pack()
+BUTTON_WIDTH = 25
+
+show_button1 = Button(frameGraphique1, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button1.pack()
+
+show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button2.pack()
+
+show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button3.pack()
+
+show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button4.pack()
+
+show_button5 = Button(frameGraphique5, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button5.pack()
+
+show_button6 = Button(frameGraphique6, text="Calibration", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button6.pack()
+
+show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button7.pack()
+
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
