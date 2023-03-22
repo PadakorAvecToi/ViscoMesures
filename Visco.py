@@ -34,7 +34,25 @@ labellogo.pack()
 #====================================================================================================
 
 def plot_graphs():
-    #...
+
+    # Ouvrez le fichier TXT contenant les données
+    with open('ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
+        data = f.read().splitlines()
+
+    # Créez des listes pour stocker les données
+    x = []
+    y = []
+    w = []
+    z = []
+
+    # Parcourez chaque ligne du fichier TXT
+    for line in data[1:]:
+        # Séparez les valeurs x, y, w et z en utilisant la tabulation comme séparateur
+        split_line = line.split('\t')
+        x.append(float(split_line[0]))
+        y.append(float(split_line[3]))
+        w.append(float(split_line[1]))
+        z.append(float(split_line[4]))
 
     # Créez une figure avec deux sous-graphiques
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
@@ -44,7 +62,7 @@ def plot_graphs():
     ax2.plot(w, z, color='red', linewidth=2)
 
     # Ajoutez des étiquettes pour les axes X et Y et un titre pour chaque sous-graphique
-    ax1.set_xlabel("Axe X", fontsize=12, fg="#B1BD11")
+    ax1.set_xlabel("Axe X", fontsize=12)
     ax1.set_ylabel("Axe Y", fontsize=12)
     ax1.set_title("Graphique Réel", fontsize=14)
     ax2.set_xlabel("Axe X", fontsize=12)
@@ -58,6 +76,8 @@ def plot_graphs():
     # Modifier l'apparence de la grille
     ax1.grid(color='gray', linestyle='-', linewidth=0.5)
     ax2.grid(color='gray', linestyle='-', linewidth=0.5)
+    ax1.grid(color='gray', linestyle='-', linewidth=0.7)
+    ax2.grid(color='gray', linestyle='-', linewidth=0.7)
 
     # Ajouter une légende aux sous-graphiques
     ax1.legend(['Données réelles'], loc='upper right', fontsize=12)
@@ -69,14 +89,10 @@ def plot_graphs():
     # Modifier les marges autour des sous-graphiques
     plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
 
-    # Convertir la figure Matplotlib en un widget Tkinter
-    canvas = FigureCanvasTkAgg(fig, master=frameGraphique)
+    # Afficher la fenêtre avec les deux graphiques
+    plt.show()
 
-    # Ajouter le widget dans le cadre Tkinter
-    canvas.get_tk_widget().pack()
-
-    # Mettre à jour la fenêtre Tkinter
-    window.update()
+#====================================================================================================
 
 # création du bouton pour afficher les graphiques
 show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
