@@ -120,7 +120,7 @@ def plot_graphs():
 
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures"
+    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\test.ppx"
 
     # Créer une instance de PowerPoint
     powerpoint = win32com.client.Dispatch("PowerPoint.Application")
