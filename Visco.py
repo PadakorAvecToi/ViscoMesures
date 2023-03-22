@@ -13,8 +13,26 @@ window = Tk()
 framelogo = ttk.Frame(window)
 framelogo.place(x=-180, y=-50)
 
-frameGraphique = ttk.Frame(window)
-frameGraphique.place(x=20, y=80)
+frameGraphique1 = ttk.Frame(window)
+frameGraphique1.place(x=20, y=80)
+
+frameGraphique2 = ttk.Frame(window)
+frameGraphique2.place(x=20, y=160)
+
+frameGraphique3 = ttk.Frame(window)
+frameGraphique3.place(x=20, y=240)
+
+frameGraphique4 = ttk.Frame(window)
+frameGraphique4.place(x=20, y=320)
+
+frameGraphique5 = ttk.Frame(window)
+frameGraphique5.place(x=20, y=400)
+
+frameGraphique6 = ttk.Frame(window)
+frameGraphique6.place(x=20, y=480)
+
+frameGraphique7 = ttk.Frame(window)
+frameGraphique7.place(x=20, y=560)
 
 framePlacement1 = ttk.Frame(window)
 framePlacement1.place(x=500, y=100)
@@ -125,9 +143,6 @@ def open_powerpoint():
 #====================================================================================================
 
 # création du bouton pour afficher les graphiques
-
-show_button = Button(frameGraphique, text="Afficher les graphiques", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14))
-show_button.pack()
 
 BUTTON_WIDTH = 25
 
