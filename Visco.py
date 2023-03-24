@@ -115,16 +115,17 @@ def plot_graphs():
     # Modifier la taille de la fenêtre
     fig.set_size_inches(10, 6)
 
-        # Changer le nom de la fenêtre
-    fig.canvas.set_window_title("Banc de Viscosite")
+    # Modifier l'icône de la fenêtre
+    img = plt.imread('logouppa.png')
+    plt.imshow(img)
+    plt.axis('off')
+    fig.canvas.manager.set_window_icon(img)
 
-    # Changer l'icône de la fenêtre
-    # Mettez le chemin complet vers l'icône de votre choix
-    #fig.canvas.manager.set_window_icon("uppa.ico")
+    # Modifier le nom de la fenêtre
+    fig.canvas.set_window_title('Banc de viscosité')
 
-    # Changer la couleur de la police de la fenêtre
-    fig.patch.set_facecolor('#233448')
-    plt.rcParams['text.color'] = '#B1BD11'
+    # Modifier la couleur de la police affichée sur la fenêtre
+    plt.rcParams['text.color'] = 'Yellow'
 
     # Afficher la fenêtre avec les deux graphiques
     plt.show()
