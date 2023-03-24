@@ -116,11 +116,11 @@ def plot_graphs():
     fig.set_size_inches(10, 6)
 
         # Changer le nom de la fenêtre
-    fig.canvas.set_window_title('Banc de Viscosite')
+    fig.canvas.set_window_title("Banc de Viscosite")
 
     # Changer l'icône de la fenêtre
     # Mettez le chemin complet vers l'icône de votre choix
-    fig.canvas.manager.set_window_icon("logouppa.png")
+    #fig.canvas.manager.set_window_icon("uppa.ico")
 
     # Changer la couleur de la police de la fenêtre
     fig.patch.set_facecolor('#233448')
