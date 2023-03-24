@@ -112,8 +112,19 @@ def plot_graphs():
     plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
 
 
-    fig = plt.figure()
-    fig.set_size_inches(21, 12)
+    # Modifier la taille de la fenêtre
+    fig.set_size_inches(10, 6)
+
+        # Changer le nom de la fenêtre
+    fig.canvas.set_window_title('Banc de Viscosite')
+
+    # Changer l'icône de la fenêtre
+    # Mettez le chemin complet vers l'icône de votre choix
+    fig.canvas.manager.set_window_icon("logouppa.png")
+
+    # Changer la couleur de la police de la fenêtre
+    fig.patch.set_facecolor('#233448')
+    plt.rcParams['text.color'] = '#B1BD11'
 
     # Afficher la fenêtre avec les deux graphiques
     plt.show()
