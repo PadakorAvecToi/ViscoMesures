@@ -109,11 +109,14 @@ def plot_graphs():
     fig.patch.set_facecolor('#233448')
 
     # Modifier les marges autour des sous-graphiques
-    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
+    plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05, wspace=0.4, hspace=0.4)
 
 
     # Modifier la taille de la fenêtre
     fig.set_size_inches(10, 6)
+
+    # Modifier la position de la denetre des graphiques
+
 
     # Modifier l'icône de la fenêtre
     #img = plt.imread('logouppa.png')
