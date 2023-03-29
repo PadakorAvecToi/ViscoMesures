@@ -116,16 +116,16 @@ def plot_graphs():
     fig.set_size_inches(10, 6)
 
     # Modifier l'icône de la fenêtre
-    img = plt.imread('logouppa.png')
-    plt.imshow(img)
-    plt.axis('off')
-    fig.canvas.manager.set_window_icon(img)
+    #img = plt.imread('logouppa.png')
+    #plt.imshow(img)
+    #plt.axis('off')
+    #fig.canvas.manager.set_window_icon(img)
 
     # Modifier le nom de la fenêtre
-    fig.canvas.set_window_title('Banc de viscosité')
+    #fig.canvas.set_window_title('Banc de viscosité')
 
     # Modifier la couleur de la police affichée sur la fenêtre
-    plt.rcParams['text.color'] = 'Yellow'
+    #plt.rcParams['text.color'] = 'Yellow'
 
     # Afficher la fenêtre avec les deux graphiques
     plt.show()
