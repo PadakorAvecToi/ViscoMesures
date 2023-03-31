@@ -115,7 +115,6 @@ def plot_graphs():
     # Modifier la taille de la fenêtre
     fig.set_size_inches(10, 6)
 
-    # Modifier la position de la denetre des graphiques
 
 
     # Modifier l'icône de la fenêtre
