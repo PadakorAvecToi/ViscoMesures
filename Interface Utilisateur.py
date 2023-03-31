@@ -44,7 +44,7 @@ frameVision = ttk.Frame(window)
 frameVision.place(x=1650, y=40)
 
 #insertion du logo
-logo = Image.open("logouppa.png")
+logo = Image.open("Image/logouppa.png")
 logo_resize = logo.resize((450, 150), Image.ANTIALIAS)
 
 #Création de l'image
@@ -59,7 +59,7 @@ labellogo.pack()
 def plot_graphs():
 
     # Ouvrez le fichier TXT contenant les données
-    with open('ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
+    with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
         data = f.read().splitlines()
 
     # Créez des listes pour stocker les données
@@ -136,7 +136,7 @@ def plot_graphs():
 
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\test.pptx"
+    powerpoint_file = r"Fichier/test.pptx"
 
     # Créer une instance de PowerPoint
     powerpoint = win32com.client.Dispatch("PowerPoint.Application")
@@ -189,7 +189,7 @@ buttonvisioneuse.pack()
 window.title("Banc de Viscosité")
 window.geometry("1920x1080")
 window.minsize(1080, 720)
-window.iconbitmap("uppa.ico")
+window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
 
 
