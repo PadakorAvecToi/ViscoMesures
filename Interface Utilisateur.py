@@ -44,7 +44,7 @@ frameVision = ttk.Frame(window)
 frameVision.place(x=1650, y=40)
 
 #insertion du logo
-logo = Image.open("logouppa.png")
+logo = Image.open("Image/logouppa.png")
 logo_resize = logo.resize((450, 150), Image.ANTIALIAS)
 
 #Création de l'image
@@ -59,7 +59,7 @@ labellogo.pack()
 def plot_graphs():
 
     # Ouvrez le fichier TXT contenant les données
-    with open('ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
+    with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
         data = f.read().splitlines()
 
     # Créez des listes pour stocker les données
@@ -109,11 +109,25 @@ def plot_graphs():
     fig.patch.set_facecolor('#233448')
 
     # Modifier les marges autour des sous-graphiques
-    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
+    plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05, wspace=0.4, hspace=0.4)
 
 
-    fig = plt.figure()
-    fig.set_size_inches(21, 12)
+    # Modifier la taille de la fenêtre
+    fig.set_size_inches(10, 6)
+
+
+
+    # Modifier l'icône de la fenêtre
+    #img = plt.imread('logouppa.png')
+    #plt.imshow(img)
+    #plt.axis('off')
+    #fig.canvas.manager.set_window_icon(img)
+
+    # Modifier le nom de la fenêtre
+    #fig.canvas.set_window_title('Banc de viscosité')
+
+    # Modifier la couleur de la police affichée sur la fenêtre
+    plt.rcParams['text.color'] = 'Yellow'
 
     # Afficher la fenêtre avec les deux graphiques
     plt.show()
@@ -122,7 +136,7 @@ def plot_graphs():
 
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\test.pptx"
+    powerpoint_file = r"Fichier/test.pptx"
 
     # Créer une instance de PowerPoint
     powerpoint = win32com.client.Dispatch("PowerPoint.Application")
@@ -175,7 +189,7 @@ buttonvisioneuse.pack()
 window.title("Banc de Viscosité")
 window.geometry("1920x1080")
 window.minsize(1080, 720)
-window.iconbitmap("uppa.ico")
+window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
 
 
