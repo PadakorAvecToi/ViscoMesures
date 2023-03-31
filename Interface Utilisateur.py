@@ -127,7 +127,7 @@ def plot_graphs():
     #fig.canvas.set_window_title('Banc de viscosité')
 
     # Modifier la couleur de la police affichée sur la fenêtre
-    #plt.rcParams['text.color'] = 'Yellow'
+    plt.rcParams['text.color'] = 'Yellow'
 
     # Afficher la fenêtre avec les deux graphiques
     plt.show()
