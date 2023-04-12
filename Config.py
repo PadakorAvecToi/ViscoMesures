@@ -42,43 +42,18 @@ ports = serial.tools.list_ports.comports()
 # Vérification de chaque port pour détecter le dispositif RS232
 for port in ports:
     try:
-        # Création d'une instance de connexion série
-        ser = serial.Serial(port.device)
-        # Vérification du dispositif connecté
-        if ser.isOpen():
-            # Si le port est ouvert, affichage du nom du port
-            print("Dispositif détecté sur le port :", port.device)
-            # Fermeture de la connexion série
-            ser.close()
+        # Récupération des informations sur le port
+        port_info = port.__dict__
+        # Affichage des informations du port détecté
+        print("Port: {}\nFabricant: {}\nDescription: {}\nNuméro de série: {}\n".format(port_info['device'], port_info['manufacturer'], port_info['description'], port_info.get('serial_number', 'N/A')))
     except:
         pass
 
 
+
+
+
 #====================================================================================================
-
-import serial
-
-# Configuration des paramètres de communication RS232
-ser = serial.Serial(
-    port='COM1',  # Modifier le port de communication en fonction de votre configuration
-    baudrate=19200,
-    parity=serial.PARITY_NONE,
-    stopbits=serial.STOPBITS_ONE,
-    bytesize=serial.EIGHTBITS,
-    timeout=1
-)
-
-# Ouverture de la connexion RS232
-ser.isOpen()
-print("Connexion établie avec succés avec le détecteur synchrone SRS SR850")
-
-# Envoi de commandes au détecteur synchrone
-ser.write(b'FREQ?\r\n')  # Demande de la fréquence de mesure actuelle
-response = ser.readline()
-print(response.decode('ascii'))  # Affichage de la réponse du détecteur synchrone
-
-# Fermeture de la connexion RS232
-ser.close()
 
 
 #====================================================================================================
@@ -135,6 +110,94 @@ else:
         ser.close()
 
 
+
+
+
+#====================================================================================================
+import serial
+import time
+
+# Définir les paramètres de communication RS232
+ser = serial.Serial('COM1', 9600, timeout=1)
+
+# Attendre 2 secondes pour que le détecteur synchrone SRS SR850 démarre
+time.sleep(2)
+
+# Choisir la fréquence de référence (par exemple, 10 kHz)
+freq_ref = 'FRQREF 10.000E3\n'
+
+# Envoyer la commande RS232 pour choisir la fréquence de référence
+ser.write(freq_ref.encode())
+
+# Attendre 500 ms pour que le détecteur synchrone SRS SR850 prenne en compte la nouvelle fréquence de référence
+time.sleep(0.5)
+
+# Vérifier que la fréquence de référence a été mise à jour
+ser.write(b'FRQREF?\n')
+response = ser.readline().decode().strip()
+print(f'La fréquence de référence actuelle est {response}')
+
+# Fermer la connexion RS232
+ser.close()
+
+
+#====================================================================================================
+import serial
+import time
+
+# Définir les paramètres de communication RS232
+ser = serial.Serial('COM1', 9600, timeout=1)
+
+# Attendre 2 secondes pour que le détecteur synchrone SRS SR850 démarre
+time.sleep(2)
+
+# Choisir la tension d'excitation (par exemple, 1 V)
+v_exc = 'AUXV1 1\n'
+
+# Envoyer la commande RS232 pour choisir la tension d'excitation
+ser.write(v_exc.encode())
+
+# Attendre 500 ms pour que le détecteur synchrone SRS SR850 prenne en compte la nouvelle tension d'excitation
+time.sleep(0.5)
+
+# Vérifier que la tension d'excitation a été mise à jour
+ser.write(b'AUXV1?\n')
+response = ser.readline().decode().strip()
+print(f'La tension d excitation actuelle est {response} V')
+
+# Fermer la connexion RS232
+ser.close()
+
+
+
+
+
+#====================================================================================================
+import serial
+import time
+
+# Définir les paramètres de communication RS232
+ser = serial.Serial('COM1', 9600, timeout=1)
+
+# Attendre 2 secondes pour que le détecteur synchrone SRS SR850 démarre
+time.sleep(2)
+
+# Choisir le pas de fréquence (par exemple, 10 Hz)
+freq_step = 'FSTEP 10\n'
+
+# Envoyer la commande RS232 pour choisir le pas de fréquence
+ser.write(freq_step.encode())
+
+# Attendre 500 ms pour que le détecteur synchrone SRS SR850 prenne en compte le nouveau pas de fréquence
+time.sleep(0.5)
+
+# Vérifier que le pas de fréquence a été mis à jour
+ser.write(b'FSTEP?\n')
+response = ser.readline().decode().strip()
+print(f'Le pas de fréquence actuel est de {response} Hz')
+
+# Fermer la connexion RS232
+ser.close()
 
 
 
