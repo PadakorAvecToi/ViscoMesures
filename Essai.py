@@ -1,3 +1,6 @@
+import win32com.client
+from tkinter import messagebox
+
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
     powerpoint_file = r"Fichier/test.pptx"
