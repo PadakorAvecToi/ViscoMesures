@@ -27,7 +27,7 @@
     #print("Température : {:.2f} °C".format(temperature))
 
 
-import nidaqmx
+'''import nidaqmx
 import nidaqmx.constants
 import time
 
@@ -43,4 +43,34 @@ with nidaqmx.Task() as task:
     # Affichage de la tension
     print("Voltage : {:.2f} V".format(voltage))
     print (temperature )
+
+'''
+
+import nidaqmx
+import nidaqmx.constants
+import math
+
+
+# Création d'une instance du périphérique d'acquisition de données
+with nidaqmx.Task() as task:
+    # Configuration du canal d'entrée analogique pour la tension
+    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+    # Lecture de la tension du canal d'entrée
+    voltage = task.read()
+
+
+    # Conversion de la tension en température
+    resistance = (5.0 * 10000.0 / voltage) - 10000.0 # Remplacez 10000.0 par la valeur de résistance de la thermistance que vous utilisez
+    temperature = 20 + (voltage*4)
+
+
+    # Affichage de la tension
+    print("Voltage : {:.2f} V".format(voltage))
+    
+    # Affichage de la température
+    print("Température : {:.2f} °C".format(temperature))
+
+
+
+
 
