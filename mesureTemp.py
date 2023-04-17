@@ -61,7 +61,7 @@ with nidaqmx.Task() as task:
 
     # Conversion de la tension en température
     resistance = (5.0 * 10000.0 / voltage) - 10000.0 # Remplacez 10000.0 par la valeur de résistance de la thermistance que vous utilisez
-    temperature = 20 + (voltage*4)
+    temperature = 20 + (voltage*12)
 
 
     # Affichage de la tension
