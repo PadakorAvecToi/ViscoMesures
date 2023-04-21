@@ -1,17 +1,59 @@
 import serial.tools.list_ports
 
-# Recherche de tous les ports de communication disponibles
+# Obtenir la liste des ports série disponibles
 ports = serial.tools.list_ports.comports()
 
-# Vérification de chaque port pour détecter le dispositif RS232
-for port in ports:
-    try:
-        # Récupération des informations sur le port
-        port_info = port.__dict__
-        # Affichage des informations du port détecté
-        print("Port: {}\nFabricant: {}\nDescription: {}\nNuméro de série: {}\n".format(port_info['device'], port_info['manufacturer'], port_info['description'], port_info.get('serial_number', 'N/A')))
-    except:
-        pass
+# Vérifier s'il y a des ports disponibles
+if len(ports) == 0:
+    print("Aucun port série disponible.")
+else:
+    print("Ports série disponibles :")
 
+    # Afficher chaque port disponible
+    for port in ports:
+        print(f"- {port.device} : {port.description}")
+
+
+
+
+
+
+
+
+'''
+
+import serial
+
+
+# Paramètres de communication série
+port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+bytesize = 8  # Taille des octets
+parity = 'N'  # Parité (N=aucune, E=pair, O=impair)
+stopbits = 1  # Nombre de bits de stop
+
+
+# Ouvrir la connexion série
+ser = serial.Serial(port=port, baudrate=baudrate, bytesize=bytesize, parity=parity, stopbits=stopbits)
+
+
+# Envoyer la commande au détecteur synchrone
+commande = "*IDN?\r"  # Commande à envoyer avec un retour chariot à la fin
+ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+
+
+# Lire la réponse du détecteur synchrone
+reponse = ser.readline().decode().strip()  # Lire la réponse et décoder en str
+if reponse:
+    print(f"Réponse du détecteur synchrone : {reponse}")
+else:
+    print("Aucune réponse du détecteur synchrone")
+
+
+# Fermer la connexion série
+ser.close()
+
+
+'''
 
 
