@@ -17,6 +17,10 @@ for port in ports:
 
 
 
+
+
+
+
 '''
 
 import serial
