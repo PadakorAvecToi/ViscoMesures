@@ -38,6 +38,34 @@ with nidaqmx.Task() as task:
     
     # Lecture de la tension du canal d'entrée
 
+<<<<<<< HEAD
+    # Affichage de la tension
+    print("Voltage : {:.2f} V".format(voltage))
+    print (temperature )
+
+'''
+
+import nidaqmx
+import nidaqmx.constants
+import math
+
+
+# Création d'une instance du périphérique d'acquisition de données
+with nidaqmx.Task() as task:
+    # Configuration du canal d'entrée analogique pour la tension
+    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+    # Lecture de la tension du canal d'entrée
+    voltage = task.read()
+
+
+    # Conversion de la tension en température
+    resistance = (5.0 * 10000.0 / voltage) - 10000.0 # Remplacez 10000.0 par la valeur de résistance de la thermistance que vous utilisez
+    temperature = 20 + (voltage*12)
+
+
+    # Affichage de la tension
+    print("Voltage : {:.2f} V".format(voltage))
+=======
     moyenne = 0
     moy = 0
     for i in range(70):
@@ -50,6 +78,7 @@ with nidaqmx.Task() as task:
     result=moyenne/70
     resultVolt=moy/70
     
+>>>>>>> a4854da5638f077df8c0bc84b284e4ba6d35d429
     
 
     # Affichage de la tension
