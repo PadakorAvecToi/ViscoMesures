@@ -1,19 +1,32 @@
-import win32com.client
-from tkinter import messagebox
+import os
+import tkinter as tk
+from tkinter import filedialog
 
+# Créer la fenêtre principale
+root = tk.Tk()
+
+# Définir la fonction pour ouvrir le fichier PowerPoint
 def open_powerpoint():
-    # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"Fichier/test.pptx"
+    # Ouvre la boîte de dialogue pour sélectionner un fichier PowerPoint
+    file_path = filedialog.askopenfilename(title="Sélectionnez un fichier PowerPoint", filetypes=(("PowerPoint files", "*.pptx"), ("all files", "*.*")))
+    
+    # Vérifie que l'utilisateur a sélectionné un fichier et qu'il existe
+    if file_path and os.path.exists(file_path):
+        # Vérifie que PowerPoint est installé sur cet ordinateur
+        if os.path.isfile("C:/Program Files/Microsoft Office/root/Office16/POWERPNT.exe"):
+            # Ouvre le fichier avec PowerPoint
+            os.startfile(file_path)
+        else:
+            # Affiche une erreur si PowerPoint n'est pas installé
+            tk.messagebox.showerror("Erreur", "Impossible d'ouvrir PowerPoint, veuillez vérifier que le logiciel est bien installé sur cet ordinateur.")
+    else:
+        # Affiche une erreur si aucun fichier n'a été sélectionné ou si le fichier n'existe pas
+        tk.messagebox.showerror("Erreur", "Impossible de trouver le fichier PowerPoint sélectionné.")
 
-    # Créer une instance de PowerPoint
-    powerpoint = win32com.client.Dispatch("PowerPoint.Application")
+# Créer le bouton
+button = tk.Button(root, text="Ouvrir PowerPoint", command=open_powerpoint)
+button.pack()
 
-    try:
-        # Ouvrir le fichier PowerPoint
-        presentation = powerpoint.Presentations.Open(powerpoint_file)
+# Lancer la fenêtre principale
+root.mainloop()
 
-        # Afficher la présentation en mode diaporama
-        presentation.SlideShowSettings.Run()
-    except:
-        # Si une erreur se produit, afficher un message d'erreur
-        messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
