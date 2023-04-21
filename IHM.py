@@ -56,6 +56,10 @@ labellogo.pack()
 
 #====================================================================================================
 
+#Code de détection automatique des ports
+
+#====================================================================================================
+
 def plot_graphs():
 
     # Ouvrez le fichier TXT contenant les données
@@ -136,7 +140,7 @@ def plot_graphs():
 
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"Fichier/test.pptx"
+    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\Fichier\test.pptx"
 
     # Créer une instance de PowerPoint
     powerpoint = win32com.client.Dispatch("PowerPoint.Application")
