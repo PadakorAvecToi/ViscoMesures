@@ -1,19 +1,23 @@
-import win32com.client
-from tkinter import messagebox
+import os
+import tkinter as tk
+from tkinter import filedialog
 
+# Créer la fenêtre principale
+root = tk.Tk()
+
+# Définir la fonction pour ouvrir le fichier PowerPoint
 def open_powerpoint():
-    # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"Fichier/test.pptx"
-
-    # Créer une instance de PowerPoint
-    powerpoint = win32com.client.Dispatch("PowerPoint.Application")
-
-    try:
+    # Ouvrir une boîte de dialogue pour sélectionner le fichier
+    file_path = filedialog.askopenfilename(defaultextension=".pptx",
+                                           filetypes=[("test", "*.pptx")])
+    # Vérifier si un fichier a été sélectionné
+    if file_path:
         # Ouvrir le fichier PowerPoint
-        presentation = powerpoint.Presentations.Open(powerpoint_file)
+        os.startfile(file_path)
 
-        # Afficher la présentation en mode diaporama
-        presentation.SlideShowSettings.Run()
-    except:
-        # Si une erreur se produit, afficher un message d'erreur
-        messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
+# Créer le bouton
+button = tk.Button(root, text="Ouvrir PowerPoint", command=open_powerpoint)
+button.pack()
+
+# Lancer la fenêtre principale
+root.mainloop()
