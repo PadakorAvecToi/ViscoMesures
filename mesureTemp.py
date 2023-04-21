@@ -27,7 +27,7 @@
     #print("Température : {:.2f} °C".format(temperature))
 
 
-'''import nidaqmx
+import nidaqmx
 import nidaqmx.constants
 import time
 
@@ -37,9 +37,8 @@ with nidaqmx.Task() as task:
     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
     
     # Lecture de la tension du canal d'entrée
-    voltage = task.read()
-    temperature = nidaqmx.constants.UsageTypeAI.TEMPERATURE_THERMOCOUPLE
 
+<<<<<<< HEAD
     # Affichage de la tension
     print("Voltage : {:.2f} V".format(voltage))
     print (temperature )
@@ -66,11 +65,23 @@ with nidaqmx.Task() as task:
 
     # Affichage de la tension
     print("Voltage : {:.2f} V".format(voltage))
+=======
+    moyenne = 0
+    moy = 0
+    for i in range(70):
+        voltage = task.read()
+        temperature = 20 + (voltage*10)
+        moy= moy + voltage
+        moyenne = moyenne + temperature
+        time.sleep(0.1)
     
-    # Affichage de la température
-    print("Température : {:.2f} °C".format(temperature))
+    result=moyenne/70
+    resultVolt=moy/70
+    
+>>>>>>> a4854da5638f077df8c0bc84b284e4ba6d35d429
+    
 
-
-
-
+    # Affichage de la tension
+    print(resultVolt)
+    print (result)
 
