@@ -3,7 +3,7 @@
 import serial
 
 # Paramètres de communication série
-port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 
 # Ouvrir la connexion série
@@ -21,28 +21,22 @@ print(f"Réponse du détecteur synchrone : {reponse}")
 ser.close()
 
 
+import serial.tools.list_ports
 
-import serial
+# Recherche de tous les ports de communication disponibles
+ports = serial.tools.list_ports.comports()
 
-# Paramètres de communication série
-port = 'COM1'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
-baudrate = 9600  # Vitesse de communication en bauds
+# Vérification de chaque port pour détecter le dispositif RS232
+for port in ports:
+    try:
+        # Récupération des informations sur le port
+        port_info = port.__dict__
+        # Affichage des informations du port détecté
+        print("Port: {}\nFabricant: {}\nDescription: {}\nNuméro de série: {}\n".format(port_info['device'], port_info['manufacturer'], port_info['description'], port_info.get('serial_number', 'N/A')))
+    except:
+        pass
 
-# Ouvrir la connexion série
-ser = serial.Serial(port, baudrate)
 
-# Lire les données envoyées par le détecteur synchrone
-while True:
-    if ser.in_waiting > 0:
-        data = ser.readline().decode().strip()  # Lire la ligne de données et décoder en str
-        print(f"Données reçues : {data}")
-    else:
-        continue
-
-    # Ajoutez ici le traitement des données reçues selon vos besoins
-
-# Fermer la connexion série (en cas d'interruption de la boucle while)
-ser.close()
 
 
 
