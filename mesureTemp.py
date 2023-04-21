@@ -34,7 +34,8 @@ import time
 # Création d'une instance du périphérique d'acquisition de données
 with nidaqmx.Task() as task:
     # Configuration du canal d'entrée analogique
-    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+    task.ai_channels.add_ai_voltage_chan("Dev1/ai0",
+    terminal_config=nidaqmx.constants.TerminalConfiguration(10106) , min_val=-10.0, max_val=10.0, units=nidaqmx.constants.VoltageUnits(10348))
     
     # Lecture de la tension du canal d'entrée
 
@@ -42,7 +43,7 @@ with nidaqmx.Task() as task:
     moy = 0
     for i in range(70):
         voltage = task.read()
-        temperature = 20 + (voltage*10)
+        temperature = 20 + (voltage*5)
         moy= moy + voltage
         moyenne = moyenne + temperature
         time.sleep(0.1)
