@@ -1,53 +1,41 @@
-import serial.tools.list_ports
-
-# Recherche de tous les ports disponibles
-ports = serial.tools.list_ports.comports()
-
-# Affichage des informations sur les ports COM détectés
-for port in ports:
-    print(f"Port: {port.device} - Description: {port.description}")
-
-
-
-'''
-
 import serial
 
 # Paramètres de communication série
 port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
-bytesize = 8  # Taille des octets
-parity = 'N'  # Parité (N=aucune, E=pair, O=impair)
-stopbits = 1  # Nombre de bits de stop
 
-try:
-    # Ouvrir la connexion série
-    ser = serial.Serial(port=port, baudrate=baudrate, bytesize=bytesize, parity=parity, stopbits=stopbits)
+# Ouvrir la connexion série
+ser = serial.Serial(port, baudrate)
 
-    # Envoyer la commande au détecteur synchrone
-    commande = "*IDN?\r"  # Commande à envoyer sans retour chariot à la fin
-    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+# Récupérer la fréquence actuelle du détecteur synchrone
+commande = "FREQ?\r"  # Commande pour récupérer la fréquence avec un retour chariot à la fin
+ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+reponse = ser.readline().decode().rstrip()  # Lire la réponse sans conversion en str, en supprimant le retour chariot en fin de ligne
+if reponse:
+    print(f"Fréquence actuelle du détecteur synchrone : {reponse}")
+else:
+    print("Aucune réponse du détecteur synchrone")
 
-    # Lire la réponse du détecteur synchrone
-    reponse = ""
-    while True:
-        caractere = ser.read().decode()
-        if caractere == "\r":
-            break
-        reponse += caractere
-    if reponse:
-        print(f"Réponse du détecteur synchrone : {reponse}")
-    else:
-        print("Aucune réponse du détecteur synchrone")
+# Modifier la fréquence du détecteur synchrone
+commande = "FREQ 1000\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
+ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+reponse = ser.readline().decode().rstrip()  # Lire la réponse sans conversion en str, en supprimant le retour chariot en fin de ligne
+if reponse:
+    print(f"Réponse du détecteur synchrone : {reponse}")
+else:
+    print("Aucune réponse du détecteur synchrone")
 
-except serial.SerialException as e:
-    print(f"Erreur de communication série : {e}")
-finally:
-    # Fermer la connexion série
-    if 'ser' in locals():
-        ser.close()
+# Récupérer la nouvelle fréquence du détecteur synchrone
+commande = "FREQ?\r"  # Commande pour récupérer la fréquence avec un retour chariot à la fin
+ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+reponse = ser.readline().decode().rstrip()  # Lire la réponse sans conversion en str, en supprimant le retour chariot en fin de ligne
+if reponse:
+    print(f"Nouvelle fréquence du détecteur synchrone : {reponse}")
+else:
+    print("Aucune réponse du détecteur synchrone")
+
+# Fermer la connexion série
+ser.close()
 
 
 
-
-'''
