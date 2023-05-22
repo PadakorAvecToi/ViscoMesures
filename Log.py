@@ -1,7 +1,7 @@
 import logging
 
 def setup_logger():
-    logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
+    logging.basicConfig(filename='Fichier_log.log', level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 
 def log_debug(message):
     logging.debug(message)
