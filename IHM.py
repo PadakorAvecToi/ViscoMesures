@@ -5,6 +5,15 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import win32com.client
 from tkinter import messagebox
+import logging
+
+#fonction permettantr de mettre a jour le fichier log
+
+logging.setup_logger()
+
+logging.log_info('Une action a été effectuée.')
+logging.log_warning('Un probleme peut survenir.')
+logging.log_error('Erreur la fonction correspondante ne fonctionne pas.')
 
 # création de la fenêtre
 window = Tk()
