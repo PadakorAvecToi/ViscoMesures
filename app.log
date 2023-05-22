@@ -1,7 +1,0 @@
-
-2023-05-22 11:10:46,837 INFO: Une action a ete effectuee.
-2023-05-22 11:10:46,837 WARNING: Un probleme peut survenir.
-2023-05-22 11:10:46,837 ERROR: Erreur la fonction correspondante ne fonctionne pas.
-2023-05-22 11:10:46,837 CRITICAL: Erreur critique du systeme.
-2023-05-22 11:10:48,154 ERROR: Erreur dans plot_graphs: name 'pt' is not defined
-2023-05-22 11:10:48,855 ERROR: Erreur dans plot_graphs: name 'pt' is not defined
