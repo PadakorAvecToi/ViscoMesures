@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import win32com.client
 from tkinter import messagebox
-import logging
+import
 
 #fonction permettantr de mettre a jour le fichier log
 
