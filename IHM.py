@@ -154,7 +154,7 @@ def etalonage():
 
 #====================================================================================================
 
-#Code d'affichege des graphs
+#Code d'affichage des graphs
 
 def plot_graphs():
     
@@ -175,9 +175,9 @@ def plot_graphs():
             # Séparez les valeurs x, y, w et z en utilisant la tabulation comme séparateur
             split_line = line.split('\t')
             x.append(float(split_line[0]))
-            y.append(float(split_line[3]))
-            w.append(float(split_line[1]))
-            z.append(float(split_line[4]))
+            y.append(float(split_line[1]))
+            w.append(float(split_line[0]))
+            z.append(float(split_line[2]))
 
 
         # Créez une figure avec deux sous-graphiques
