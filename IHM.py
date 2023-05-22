@@ -70,6 +70,14 @@ labellogo.pack()
 #Code de détection automatique des ports
 
 #====================================================================================================
+#Fonction d'étalonage
+
+def etalonage():
+    
+    try:
+        
+        encadre = tk.LabelFrame(window, text="Encadré")
+#====================================================================================================
 
 #Code d'affichege des graphs
 
