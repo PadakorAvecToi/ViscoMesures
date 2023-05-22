@@ -159,7 +159,7 @@ def plot_graphs():
 
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\Fichier\test.pptx"
+    powerpoint_file = r"C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\test.pptx"
 
     try:
         # Créer une instance de PowerPoint
