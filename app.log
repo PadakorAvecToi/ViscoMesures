@@ -1,0 +1,5 @@
+2023-05-22 10:55:33,283 INFO: Une action a ete effectuee.
+2023-05-22 10:55:33,283 WARNING: Un probleme peut survenir.
+2023-05-22 10:55:33,283 ERROR: Erreur la fonction correspondante ne fonctionne pas.
+2023-05-22 10:55:33,284 CRITICAL: Erreur critique du systeme.
+2023-05-22 10:55:33,687 ERROR: Erreur dans open_powerpoint: <unknown>.Ope
