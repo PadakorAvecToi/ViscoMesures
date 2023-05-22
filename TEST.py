@@ -1,21 +1,56 @@
 import serial
+import time
 
 # Paramètres de communication série
-port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 
-# Ouvrir la connexion série
-ser = serial.Serial(port, baudrate)
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
 
-# Récupérer la fréquence actuelle du détecteur synchrone
-commande = "FREQ?\r"  # Commande pour récupérer la fréquence avec un retour chariot à la fin
-ser.write(commande.encode())  # Envoyer la commande encodée en bytes
-reponse = ser.readline().decode().rstrip()  # Lire la réponse sans conversion en str, en supprimant le retour chariot en fin de ligne
-if reponse:
-    print(f"Fréquence actuelle du détecteur synchrone : {reponse}")
-else:
-    print("Aucune réponse du détecteur synchrone")
+    # Récupérer la fréquence actuelle du détecteur synchrone
+    commande = "FREQ?\r"  # Commande pour récupérer la fréquence avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse = ""
+    while True:
+        caractere = ser.read().decode()
+        if caractere == "\r":
+            break
+        reponse += caractere
 
+    if reponse:
+        print(f"Fréquence actuelle du détecteur synchrone : {reponse}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+'''
 # Modifier la fréquence du détecteur synchrone
 commande = "FREQ 1000\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
 ser.write(commande.encode())  # Envoyer la commande encodée en bytes
@@ -39,3 +74,4 @@ ser.close()
 
 
 
+'''
