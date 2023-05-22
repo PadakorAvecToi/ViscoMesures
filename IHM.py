@@ -5,15 +5,17 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import win32com.client
 from tkinter import messagebox
-import
+import Log
 
 #fonction permettantr de mettre a jour le fichier log
 
-logging.setup_logger()
+Log.setup_logger()
 
-logging.log_info('Une action a été effectuée.')
-logging.log_warning('Un probleme peut survenir.')
-logging.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+Log.log_info('Une action a ete effectuee.')
+Log.log_warning('Un probleme peut survenir.')
+Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+Log.log_debug('Ceci est le log de debug.')
+Log.log_critical('Erreur critique du systeme.')
 
 # création de la fenêtre
 window = Tk()
@@ -151,21 +153,22 @@ def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
     powerpoint_file = r"C:\Users\letra\Documents\GitHub\ViscoMesures\Fichier\test.pptx"
 
-    # Créer une instance de PowerPoint
-    powerpoint = win32com.client.Dispatch("PowerPoint.Application")
-
     try:
+        # Créer une instance de PowerPoint
+        powerpoint = win32com.client.Dispatch("PowerPoint.Application")
+
         # Ouvrir le fichier PowerPoint
-        presentation = powerpoint.Presentations.Open(powerpoint_file)
+        presentation = powerpoint.Presentations.Ope(powerpoint_file)
 
         # Afficher la présentation en mode diaporama
         presentation.SlideShowSettings.Run()
-    except:
+
+    except Exception as e:
         # Si une erreur se produit, afficher un message d'erreur
+        Log.log_error(f"Erreur dans open_powerpoint: {str(e)}", log_condition=True)
         messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
 
-    # Fermer PowerPoint
-    #powerpoint.Quit()
+open_powerpoint()
 
 #====================================================================================================
 
