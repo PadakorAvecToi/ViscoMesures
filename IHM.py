@@ -6,11 +6,13 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import win32com.client
 from tkinter import messagebox
 import Log
+import tkinter as tk
+
+#====================================================================================================
 
 #fonction permettantr de mettre a jour le fichier log
 
 Log.setup_logger()
-
 Log.log_info('Une action a ete effectuee.')
 Log.log_warning('Un probleme peut survenir.')
 Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
@@ -19,6 +21,8 @@ Log.log_critical('Erreur critique du systeme.')
 
 # création de la fenêtre
 window = Tk()
+
+#====================================================================================================
 
 # création des frames
 framelogo = ttk.Frame(window)
@@ -54,6 +58,11 @@ framePlacement2.place(x=1000, y=100)
 frameVision = ttk.Frame(window)
 frameVision.place(x=1650, y=40)
 
+#framecalibration =
+#encadre_label =
+
+#====================================================================================================
+
 #insertion du logo
 logo = Image.open("Image/logouppa.png")
 logo_resize = logo.resize((450, 150), Image.ANTIALIAS)
@@ -73,10 +82,23 @@ labellogo.pack()
 #Fonction d'étalonage
 
 def etalonage():
-    
     try:
-        
-        encadre = tk.LabelFrame(window, text="Encadré")
+        # Création d'un canvas (zone de dessin) dans la fenêtre
+        canvas = tk.Canvas(window, width=1000, height=950, background="#304562", highlightthickness=0)
+
+        # Dessin d'un carré bleu sur le canvas
+        carre = canvas.create_rectangle(950, 800, 150, 200, fill="#233448")
+
+        # Placement du canvas dans la fenêtre
+        canvas.pack(expand=True)
+
+        # Ajout d'un texte en haut au milieu en jaune
+        texte = canvas.create_text(550, 240, text="Étalonnage", fill="yellow", font=("Arial", 24), justify="center")
+
+    except Exception as error_etalonage:
+        Log.log_error(f"Erreur dans l'étalonnage: {str(error_etalonage)}", log_condition=True)
+        # Affichez éventuellement un message d'erreur à l'utilisateur
+
 #====================================================================================================
 
 #Code d'affichege des graphs
@@ -187,7 +209,7 @@ def open_powerpoint():
 
 BUTTON_WIDTH = 25
 
-show_button1 = Button(frameGraphique1, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button1 = Button(frameGraphique1, text="Etalonnage", command=etalonage, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button1.pack()
 
 show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
@@ -211,6 +233,7 @@ show_button7.pack()
 buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
+#====================================================================================================
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
@@ -219,6 +242,7 @@ window.minsize(1080, 720)
 window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
 
+#====================================================================================================
 
 # afficher la fenêtre
 window.mainloop()
