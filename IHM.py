@@ -168,9 +168,9 @@ def open_powerpoint():
         # Ouvrir le fichier PowerPoint
         presentation = powerpoint.Presentations.Open(powerpoint_file)
 
-    except Exception as e:
+    except Exception as error_powerpoint:
         # Si une erreur se produit, afficher un message d'erreur
-        Log.log_error(f"Erreur dans open_powerpoint: {str(e)}", log_condition=True)
+        Log.log_error(f"Erreur dans open_powerpoint: {str(error_powerpoint)}", log_condition=True)
         messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
 
 #====================================================================================================
