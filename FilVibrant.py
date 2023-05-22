@@ -54,7 +54,7 @@ finally:
         ser.close()
 
 '''
-
+'''
 import serial
 
 # Paramètres de communication série
@@ -122,6 +122,7 @@ finally:
     if 'ser' in locals():
         ser.close()
 
+'''
 
 '''
 import serial
@@ -234,3 +235,67 @@ finally:
         ser.close()
         
 '''
+
+
+import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer le pas de fréquence actuel du détecteur synchrone
+    commande = "SRAT?\r"  # Commande pour récupérer le pas de fréquence avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse = ""
+    while True:
+        caractere = ser.read().decode()
+        if caractere == "\r":
+            break
+        reponse += caractere
+
+    if reponse:
+        print(f"Pas de fréquence actuel du détecteur synchrone : {reponse}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier le pas de fréquence du détecteur synchrone
+    nouveau_pas = 0.5  # Remplacez par le pas de fréquence souhaité (nombre flottant)
+    commande = f"SRAT {nouveau_pas:.1f}\r"  # Commande pour modifier le pas de fréquence avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse = ""
+    while True:
+        caractere = ser.read().decode()
+        if caractere == "\r":
+            break
+        reponse += caractere
+
+    if reponse:
+        print(f"Nouveau pas de fréquence du détecteur synchrone : {reponse}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+
+
+
+
+        
+
+
+
+
