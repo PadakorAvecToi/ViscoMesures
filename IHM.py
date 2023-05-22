@@ -6,19 +6,26 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import win32com.client
 from tkinter import messagebox
 import Log
+import tkinter as tk
+import serial
+import time
+
+
+#====================================================================================================
 
 #fonction permettantr de mettre a jour le fichier log
 
 Log.setup_logger()
-
-Log.log_info('Une action a ete effectuee.')
-Log.log_warning('Un probleme peut survenir.')
-Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
-Log.log_debug('Ceci est le log de debug.')
-Log.log_critical('Erreur critique du systeme.')
+#Log.log_info('Une action a ete effectuee.')
+#Log.log_warning('Un probleme peut survenir.')
+#Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+#Log.log_debug('Ceci est le log de debug.')
+#Log.log_critical('Erreur critique du systeme.')
 
 # création de la fenêtre
 window = Tk()
+
+#====================================================================================================
 
 # création des frames
 framelogo = ttk.Frame(window)
@@ -54,6 +61,11 @@ framePlacement2.place(x=1000, y=100)
 frameVision = ttk.Frame(window)
 frameVision.place(x=1650, y=40)
 
+#framecalibration =
+#encadre_label =
+
+#====================================================================================================
+
 #insertion du logo
 logo = Image.open("Image/logouppa.png")
 logo_resize = logo.resize((450, 150), Image.ANTIALIAS)
@@ -73,10 +85,73 @@ labellogo.pack()
 #Fonction d'étalonage
 
 def etalonage():
-    
     try:
+        # Création d'un canvas (zone de dessin) dans la fenêtre
+        canvas = tk.Canvas(window, width=1000, height=950, background="#304562", highlightthickness=0)
+
+        # Dessin d'un carré bleu sur le canvas
+        carre = canvas.create_rectangle(150, 150, 850, 800, fill="#233448")
+
+        # Placement du canvas dans la fenêtre
+        canvas.pack(expand=True)
+
+        # Ajout d'un texte au milieu de la fenêtre
+        texte = canvas.create_text(500, 180, text="Étalonnage", fill="yellow", font=("Arial", 24), justify="center")
         
-        encadre = tk.LabelFrame(window, text="Encadré")
+        # Paramètres de communication série
+        port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+        baudrate = 9600  # Vitesse de communication en bauds
+
+        # Ouvrir la connexion série
+        ser = serial.Serial(port, baudrate)
+
+        # Récupérer le pas de fréquence actuel du détecteur synchrone
+        commande = "SRAT?\r"  # Commande pour récupérer le pas de fréquence avec un retour chariot à la fin
+        ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+        time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+        reponse = ""
+        while True:
+            caractere = ser.read().decode()
+            if caractere == "\r":
+                break
+            reponse += caractere
+
+        if reponse:
+            print(f"Pas de fréquence actuel du détecteur synchrone : {reponse}")
+        else:
+            print("Aucune réponse du détecteur synchrone")
+
+        # Modifier le pas de fréquence du détecteur synchrone
+        nouveau_pas = 0.5  # Remplacez par le pas de fréquence souhaité (nombre flottant)
+        commande = f"SRAT {nouveau_pas:.1f}\r"  # Commande pour modifier le pas de fréquence avec un retour chariot à la fin
+        ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+        time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+        reponse = ""
+        while True:
+            caractere = ser.read().decode()
+            if caractere == "\r":
+                break
+            reponse += caractere
+
+        if reponse:
+            print(f"Nouveau pas de fréquence du détecteur synchrone : {reponse}")
+        else:
+            print("Aucune réponse du détecteur synchrone")
+
+    except Exception as error_etalonage:
+        Log.log_error(f"Erreur dans l'étalonnage: {str(error_etalonage)}", log_condition=True)
+        # Affichez éventuellement un message d'erreur à l'utilisateur
+
+    finally:
+        # Fermer la connexion série
+        if 'ser' in locals():
+            ser.close()
+
+
+  
+
 #====================================================================================================
 
 #Code d'affichege des graphs
@@ -187,7 +262,7 @@ def open_powerpoint():
 
 BUTTON_WIDTH = 25
 
-show_button1 = Button(frameGraphique1, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button1 = Button(frameGraphique1, text="Etalonnage", command=etalonage, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button1.pack()
 
 show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
@@ -211,6 +286,7 @@ show_button7.pack()
 buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
+#====================================================================================================
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
@@ -219,6 +295,7 @@ window.minsize(1080, 720)
 window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
 
+#====================================================================================================
 
 # afficher la fenêtre
 window.mainloop()
