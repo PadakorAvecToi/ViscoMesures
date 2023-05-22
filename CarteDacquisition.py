@@ -1,3 +1,4 @@
+'''
 import serial.tools.list_ports
 
 # Recherche de tous les ports disponibles
@@ -6,15 +7,15 @@ ports = serial.tools.list_ports.comports()
 # Affichage des informations sur les ports COM détectés
 for port in ports:
     print(f"Port: {port.device} - Description: {port.description}")
-
-
-
 '''
+
+
+
 
 import serial
 
 # Paramètres de communication série
-port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 bytesize = 8  # Taille des octets
 parity = 'N'  # Parité (N=aucune, E=pair, O=impair)
@@ -50,6 +51,6 @@ finally:
 
 
 
-'''
+
 
 
