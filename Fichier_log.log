@@ -1,0 +1,2 @@
+2023-05-22 16:12:07,825 ERROR: Erreur dans l'étalonnage: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2023-05-22 16:12:08,219 ERROR: Erreur dans l'étalonnage: could not open port 'COM9': FileNotFoundError(2, 'Le fichier spécifié est introuvable.', None, 2)
