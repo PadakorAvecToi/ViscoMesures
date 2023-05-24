@@ -241,7 +241,7 @@ import serial
 import time
 
 # Paramètres de communication série
-port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM4'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 
 try:

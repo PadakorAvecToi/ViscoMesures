@@ -9,6 +9,8 @@ import Log
 import tkinter as tk
 import serial
 import time
+import TEST
+import main
 
 
 #====================================================================================================
@@ -82,179 +84,18 @@ labellogo.pack()
 #Code de détection automatique des ports
 
 #====================================================================================================
-#Fonction d'étalonage
-
-def etalonage():
-    try:
-        # Création d'un canvas (zone de dessin) dans la fenêtre
-        canvas = tk.Canvas(window, width=1000, height=950, background="#304562", highlightthickness=0)
-
-        # Dessin d'un carré bleu sur le canvas
-        carre = canvas.create_rectangle(150, 150, 850, 800, fill="#233448")
-
-        # Placement du canvas dans la fenêtre
-        canvas.pack(expand=True)
-
-        # Ajout d'un texte au milieu de la fenêtre
-        texte = canvas.create_text(500, 180, text="Étalonnage", fill="yellow", font=("Arial", 24), justify="center")
-        
-        # Paramètres de communication série
-        port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
-        baudrate = 9600  # Vitesse de communication en bauds
-
-        # Ouvrir la connexion série
-        ser = serial.Serial(port, baudrate)
-
-        # Récupérer le pas de fréquence actuel du détecteur synchrone
-        commande = "SRAT?\r"  # Commande pour récupérer le pas de fréquence avec un retour chariot à la fin
-        ser.write(commande.encode())  # Envoyer la commande encodée en bytes
-        time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
-
-        reponse = ""
-        while True:
-            caractere = ser.read().decode()
-            if caractere == "\r":
-                break
-            reponse += caractere
-
-        if reponse:
-            print(f"Pas de fréquence actuel du détecteur synchrone : {reponse}")
-        else:
-            print("Aucune réponse du détecteur synchrone")
-
-        # Modifier le pas de fréquence du détecteur synchrone
-        nouveau_pas = 0.5  # Remplacez par le pas de fréquence souhaité (nombre flottant)
-        commande = f"SRAT {nouveau_pas:.1f}\r"  # Commande pour modifier le pas de fréquence avec un retour chariot à la fin
-        ser.write(commande.encode())  # Envoyer la commande encodée en bytes
-        time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
-
-        reponse = ""
-        while True:
-            caractere = ser.read().decode()
-            if caractere == "\r":
-                break
-            reponse += caractere
-
-        if reponse:
-            print(f"Nouveau pas de fréquence du détecteur synchrone : {reponse}")
-        else:
-            print("Aucune réponse du détecteur synchrone")
-
-    except Exception as error_etalonage:
-        Log.log_error(f"Erreur dans l'étalonnage: {str(error_etalonage)}", log_condition=True)
-        # Affichez éventuellement un message d'erreur à l'utilisateur
-
-    finally:
-        # Fermer la connexion série
-        if 'ser' in locals():
-            ser.close()
-
-
-  
+           
+#Code de l'etalonage    
 
 #====================================================================================================
 
-#Code d'affichege des graphs
-
-def plot_graphs():
-    
-    try:
-
-        # Ouvrez le fichier TXT contenant les données
-        with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
-            data = f.read().splitlines()
-
-        # Créez des listes pour stocker les données
-        x = []
-        y = []
-        w = []
-        z = []
-
-        # Parcourez chaque ligne du fichier TXT
-        for line in data[1:]:
-            # Séparez les valeurs x, y, w et z en utilisant la tabulation comme séparateur
-            split_line = line.split('\t')
-            x.append(float(split_line[0]))
-            y.append(float(split_line[3]))
-            w.append(float(split_line[1]))
-            z.append(float(split_line[4]))
-
-
-        # Créez une figure avec deux sous-graphiques
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
-
-        # Tracez les données dans les sous-graphiques correspondants
-        ax1.plot(x, y, color='blue', linewidth=2)
-        ax2.plot(w, z, color='red', linewidth=2)
-
-        # Ajoutez des étiquettes pour les axes X et Y et un titre pour chaque sous-graphique
-        ax1.set_xlabel("Axe X", fontsize=12)
-        ax1.set_ylabel("Axe Y", fontsize=12)
-        ax1.set_title("Graphique Réel", fontsize=14)
-        ax2.set_xlabel("Axe X", fontsize=12)
-        ax2.set_ylabel("Axe Y", fontsize=12)
-        ax2.set_title("Graphique Imaginaire", fontsize=14)
-
-        # Ajouter une grille aux sous-graphiques
-        ax1.grid(True)
-        ax2.grid(True)
-
-        # Modifier l'apparence de la grille
-        ax1.grid(color='gray', linestyle='-', linewidth=0.7)
-        ax2.grid(color='gray', linestyle='-', linewidth=0.7),
-
-        # Ajouter une légende aux sous-graphiques
-        ax1.legend(['Données réelles'], loc='upper right', fontsize=12)
-        ax2.legend(['Données imaginaires'], loc='upper right', fontsize=12)
-
-        # Modifier la couleur de fond de la figure
-        fig.patch.set_facecolor('#233448')
-
-        # Modifier les marges autour des sous-graphiques
-        plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05, wspace=0.4, hspace=0.4)
-
-
-        # Modifier la taille de la fenêtre
-        fig.set_size_inches(10, 6)
-
-
-
-        # Modifier l'icône de la fenêtre
-        #img = plt.imread('logouppa.png')
-        #plt.imshow(img)
-        #plt.axis('off')
-        #fig.canvas.manager.set_window_icon(img)
-
-        # Modifier le nom de la fenêtre
-        #fig.canvas.set_window_title('Banc de viscosité')
-
-        # Modifier la couleur de la police affichée sur la fenêtre
-        plt.rcParams['text.color'] = 'Yellow'
-
-        # Afficher la fenêtre avec les deux graphiques
-        plt.show()
-        
-    except Exception as error_plot_graph:
-        Log.log_error(f"Erreur dans plot_graphs: {str(error_plot_graph)}", log_condition=True)
-        # Affichez éventuellement un message d'erreur à l'utilisateur
+def appel_graphique():
+    TEST.plot_graphs
 
 #====================================================================================================
 
-def open_powerpoint():
-    # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\test.pptx"
-
-    try:
-        # Créer une instance de PowerPoint
-        powerpoint = win32com.client.Dispatch("PowerPoint.Application")
-
-        # Ouvrir le fichier PowerPoint
-        presentation = powerpoint.Presentations.Open(powerpoint_file)
-
-    except Exception as error_powerpoint:
-        # Si une erreur se produit, afficher un message d'erreur
-        Log.log_error(f"Erreur dans open_powerpoint: {str(error_powerpoint)}", log_condition=True)
-        messagebox.showerror("Erreur", "Impossible d'ouvrir le fichier PowerPoint.")
+def appel_powerpoint():
+    main.open_powerpoint
 
 #====================================================================================================
 
@@ -262,16 +103,16 @@ def open_powerpoint():
 
 BUTTON_WIDTH = 25
 
-show_button1 = Button(frameGraphique1, text="Etalonnage", command=etalonage, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button1 = Button(frameGraphique1, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button1.pack()
 
 show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button2.pack()
 
-show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button3.pack()
 
-show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=plot_graphs, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button4.pack()
 
 show_button5 = Button(frameGraphique5, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
@@ -283,7 +124,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=appel_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
