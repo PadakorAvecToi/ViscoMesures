@@ -1,3 +1,4 @@
+'''
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import Log
@@ -85,3 +86,22 @@ def plot_graphs():
     except Exception as error_plot_graph:
         Log.log_error(f"Erreur dans plot_graphs: {str(error_plot_graph)}", log_condition=True)
         # Affichez éventuellement un message d'erreur à l'utilisateur
+        '''
+        
+   # Vérification de la présence du détecteur synchrone sur le port COM9
+port_detecteur = "COM9"  # Remplacez par le port réel du détecteur synchrone
+
+if port_detecteur == "COM9":
+    message = "Le détecteur synchrone est connecté sur le port COM9."
+else:
+    message = "Aucun détecteur synchrone détecté."
+
+# Affichage du message dans le terminal
+print(message)
+
+
+
+
+
+
+
