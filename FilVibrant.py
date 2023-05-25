@@ -150,8 +150,8 @@ try:
         print("Aucune réponse du détecteur synchrone")
 
     # Modifier la fréquence de référence du détecteur synchrone
-    nouvelle_frequence = 2000  # Remplacez par la fréquence souhaitée
-    commande = f"SLLM {nouvelle_frequence}\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
+    nouvelle_frequence1 = 2000  # Remplacez par la fréquence souhaitée
+    commande = f"SLLM {nouvelle_frequence1}\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
     ser.write(commande.encode())  # Envoyer la commande encodée en bytes
     time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
     
@@ -204,8 +204,8 @@ try:
         print("Aucune réponse du détecteur synchrone")
 
     # Modifier la fréquence de référence du détecteur synchrone
-    nouvelle_frequence = 2000  # Remplacez par la fréquence souhaitée
-    commande = f"SULM {nouvelle_frequence}\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
+    nouvelle_frequence2 = 2000  # Remplacez par la fréquence souhaitée
+    commande = f"SULM {nouvelle_frequence2}\r"  # Commande pour modifier la fréquence avec un retour chariot à la fin
     ser.write(commande.encode())  # Envoyer la commande encodée en bytes
     time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
     
