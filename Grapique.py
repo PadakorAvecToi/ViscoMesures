@@ -8,7 +8,7 @@ def plot_graphs():
     
 
         # Ouvrez le fichier TXT contenant les données
-        with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
+        with open('Fichier/releve.txt', 'r') as f:
             data = f.read().splitlines()
 
         # Créez des listes pour stocker les données
