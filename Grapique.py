@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import Log
+
 
 #Code d'affichage des graphs
 
 def plot_graphs():
     
-    try:
 
         # Ouvrez le fichier TXT contenant les données
         with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
@@ -81,7 +80,3 @@ def plot_graphs():
 
         # Afficher la fenêtre avec les deux graphiques
         plt.show()
-
-         except Exception as error_plot_graph:
-        Log.log_error(f"Erreur dans plot_graphs: {str(error_plot_graph)}", log_condition=True)
-        # Affichez éventuellement un message d'erreur à l'utilisateur    
