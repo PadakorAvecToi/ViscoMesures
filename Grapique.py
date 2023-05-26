@@ -81,7 +81,7 @@ def plot_graphs():
 
         # Afficher la fenêtre avec les deux graphiques
         plt.show()
-        
-    except Exception as error_plot_graph:
+
+         except Exception as error_plot_graph:
         Log.log_error(f"Erreur dans plot_graphs: {str(error_plot_graph)}", log_condition=True)
-        # Affichez éventuellement un message d'erreur à l'utilisateur
+        # Affichez éventuellement un message d'erreur à l'utilisateur    
