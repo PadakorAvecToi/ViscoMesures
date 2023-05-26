@@ -18,11 +18,11 @@ import main
 #fonction permettantr de mettre a jour le fichier log
 
 Log.setup_logger()
-#Log.log_info('Une action a ete effectuee.')
-#Log.log_warning('Un probleme peut survenir.')
-#Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
-#Log.log_debug('Ceci est le log de debug.')
-#Log.log_critical('Erreur critique du systeme.')
+Log.log_info('Une action a ete effectuee.')
+Log.log_warning('Un probleme peut survenir.')
+Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+Log.log_debug('Ceci est le log de debug.')
+Log.log_critical('Erreur critique du systeme.')
 
 # création de la fenêtre
 window = Tk()
@@ -94,8 +94,19 @@ def appel_graphique():
 
 #====================================================================================================
 
-def appel_powerpoint():
-    main.open_powerpoint
+def open_powerpoint():
+    # Chemin d'accès et nom de fichier PowerPoint
+    powerpoint_file = r"C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\test.pptx"
+
+    try:
+        # Créer une instance de PowerPoint
+        powerpoint = win32com.client.Dispatch("Powerpoint.Application")
+
+        # Ouvrir le fichier PowerPoint
+        presentation = powerpoint.Presentations.Open(powerpoint_file)
+
+    except Exception as error_powerpoint:
+        Log.log_error(f"Erreur dans l'étalonnage: {str(error_powerpoint)}", log_condition=True)
 
 #====================================================================================================
 
@@ -124,7 +135,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=appel_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
