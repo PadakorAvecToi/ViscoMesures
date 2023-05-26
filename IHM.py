@@ -106,7 +106,7 @@ def open_powerpoint():
         presentation = powerpoint.Presentations.Open(powerpoint_file)
 
     except Exception as error_powerpoint:
-        print(str(error_powerpoint))
+        Log.log_error(f"Erreur dans l'étalonnage: {str(error_powerpoint)}", log_condition=True)
 
 #====================================================================================================
 
