@@ -1,8 +1,17 @@
-import serial.tools.list_ports
+         # Vérification de la présence du détecteur synchrone sur le port COM9
+port_detecteur = "COM9"  # Remplacez par le port réel du détecteur synchrone
 
-# Recherche de tous les ports disponibles
-ports = serial.tools.list_ports.comports()
+if port_detecteur == "COM9":
+    message = "Le détecteur synchrone est connecté sur le port COM9."
+else:
+    message = "Aucun détecteur synchrone détecté."
 
-# Affichage des informations sur les ports COM détectés
-for port in ports:
-    print(f"Port: {port.device} - Description: {port.description}")
+# Affichage du message dans le terminal
+print(message)
+
+
+
+
+
+
+
