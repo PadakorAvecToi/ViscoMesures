@@ -1,11 +1,3 @@
-2023-05-26 10:05:49,807 INFO: Une action a ete effectuee.
-2023-05-26 10:05:49,808 WARNING: Un probleme peut survenir.
-2023-05-26 10:05:49,808 ERROR: Erreur la fonction correspondante ne fonctionne pas.
-2023-05-26 10:05:49,808 CRITICAL: Erreur critique du systeme.
-2023-05-26 10:11:19,507 INFO: Une action a ete effectuee.
-2023-05-26 10:11:19,507 WARNING: Un probleme peut survenir.
-2023-05-26 10:11:19,507 ERROR: Erreur la fonction correspondante ne fonctionne pas.
-2023-05-26 10:11:19,508 CRITICAL: Erreur critique du systeme.
-2023-05-26 10:11:20,865 ERROR: Erreur dans l'étalonnage: (-2147221005, 'Chaîne de classe incorrecte', None, None)
-2023-05-26 10:11:22,253 ERROR: Erreur dans l'étalonnage: (-2147221005, 'Chaîne de classe incorrecte', None, None)
-2023-05-26 10:11:22,396 ERROR: Erreur dans l'étalonnage: (-2147221005, 'Chaîne de classe incorrecte', None, None)
+2023-05-26 10:17:56,594 ERROR: erreur de la fonction correspondante ne fonctionne pas.
+2023-05-26 10:18:50,040 ERROR: erreur de la fonction correspondante ne fonctionne pas.
+2023-05-26 10:19:48,784 ERROR: erreur de la fonction correspondante ne fonctionne pas.
