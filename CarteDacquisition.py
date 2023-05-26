@@ -1,50 +1,19 @@
-import serial.tools.list_ports
 import serial
-
-# Paramètres de l'appareil détecté
-reponse_attendue = "Stanford_Research_Systems,SR850,s/n27818,ver1.09"
-
-# Recherche des ports série disponibles
-ports_disponibles = list(serial.tools.list_ports.comports())
-
-# Recherche du port COM de l'appareil
-port_appareil = None
-for port in ports_disponibles:
-    try:
-        # Tentative d'ouverture du port COM
-        ser = serial.Serial(port.device)
-        ser.write(b'*IDN?\n')
-        reponse = ser.readline().strip().decode()
-
-        if reponse == reponse_attendue:
-            port_appareil = port.device
-            break
-
-        ser.close()  # Fermeture du port COM
-    except serial.SerialException:
-        pass
-
-# Vérification de la présence de l'appareil
-if port_appareil is None:
-    print("Appareil introuvable.")
-    exit()
-
-# Affichage du port sur lequel l'appareil est connecté
-print(f"L'appareil SR850 est connecté sur le port COM {port_appareil}")
+import time
 
 # Paramètres de communication série
-port = port_appareil  # Port COM de l'appareil
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 
 try:
-    # Ouvrir la connexion série avec l'appareil
+    # Ouvrir la connexion série
     ser = serial.Serial(port, baudrate)
 
-    # Envoyer la commande au détecteur synchrone
-    commande = "*IDN?\r"  # Commande à envoyer sans retour chariot à la fin
+    # Récupérer le sens de balayage actuel du détecteur synchrone
+    commande = "RSLP?\r"  # Commande pour récupérer le sens de balayage avec un retour chariot à la fin
     ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
 
-    # Lire la réponse de l'appareil
     reponse = ""
     while True:
         caractere = ser.read().decode()
@@ -53,9 +22,34 @@ try:
         reponse += caractere
 
     if reponse:
-        print(f"Réponse de l'appareil : {reponse}")
+        print(f"Sens de balayage actuel du détecteur synchrone : {reponse}")
     else:
-        print("Aucune réponse de l'appareil")
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier le sens de balayage du détecteur synchrone
+    nouveau_sens = input("Choisissez le sens de balayage (1 pour montant, 2 pour descendant) : ")
+    if nouveau_sens == "1":
+        commande = "RSLP 1\r"  # Commande pour définir le sens de balayage à montant avec un retour chariot à la fin
+    elif nouveau_sens == "2":
+        commande = "RSLP 2\r"  # Commande pour définir le sens de balayage à descendant avec un retour chariot à la fin
+    else:
+        print("Choix invalide.")
+        exit()
+
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse = ""
+    while True:
+        caractere = ser.read().decode()
+        if caractere == "\r":
+            break
+        reponse += caractere
+
+    if reponse:
+        print(f"Nouveau sens de balayage du détecteur synchrone : {reponse}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
 
 except serial.SerialException as e:
     print(f"Erreur de communication série : {e}")
@@ -64,6 +58,3 @@ finally:
     # Fermer la connexion série
     if 'ser' in locals():
         ser.close()
-
-
-
