@@ -1,7 +1,3 @@
-import CarteDacquisition
-import Config
-import FilVibrant
-import Log
-import mesureTemp
-import Sauvegarde
-import TEST
+from main import open_powerpoint
+def fonctionpowerpoint():
+    open_powerpoint
