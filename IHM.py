@@ -9,9 +9,8 @@ import Log
 import tkinter as tk
 import serial
 import time
-import TEST
-import main
-
+from main import open_powerpoint
+from Essai import fonctionpowerpoint
 
 #====================================================================================================
 
@@ -94,19 +93,8 @@ def appel_graphique():
 
 #====================================================================================================
 
-def open_powerpoint():
-    # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\test.pptx"
-
-    try:
-        # Créer une instance de PowerPoint
-        powerpoint = win32com.client.Dispatch("Powerpoint.Application")
-
-        # Ouvrir le fichier PowerPoint
-        presentation = powerpoint.Presentations.Open(powerpoint_file)
-
-    except Exception as error_powerpoint:
-        Log.log_error(f"Erreur dans l'étalonnage: {str(error_powerpoint)}", log_condition=True)
+#open_powerpoint
+fonctionpowerpoint
 
 #====================================================================================================
 
@@ -135,7 +123,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=fonctionpowerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
