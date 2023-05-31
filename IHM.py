@@ -9,20 +9,19 @@ import Log
 import tkinter as tk
 import serial
 import time
-import TEST
-import main
-
+from main import open_powerpoint
+from Essai import fonctionpowerpoint
 
 #====================================================================================================
 
 #fonction permettantr de mettre a jour le fichier log
 
 Log.setup_logger()
-#Log.log_info('Une action a ete effectuee.')
-#Log.log_warning('Un probleme peut survenir.')
-#Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
-#Log.log_debug('Ceci est le log de debug.')
-#Log.log_critical('Erreur critique du systeme.')
+Log.log_info('Une action a ete effectuee.')
+Log.log_warning('Un probleme peut survenir.')
+Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+Log.log_debug('Ceci est le log de debug.')
+Log.log_critical('Erreur critique du systeme.')
 
 # création de la fenêtre
 window = Tk()
@@ -94,8 +93,8 @@ def appel_graphique():
 
 #====================================================================================================
 
-def appel_powerpoint():
-    main.open_powerpoint
+#open_powerpoint
+fonctionpowerpoint
 
 #====================================================================================================
 
@@ -124,7 +123,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=appel_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=fonctionpowerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
