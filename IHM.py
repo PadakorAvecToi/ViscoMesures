@@ -1,16 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import win32com.client
-from tkinter import messagebox
 import Log
 import tkinter as tk
-import serial
-import time
 from main import open_powerpoint
-from Essai import fonctionpowerpoint
+from mesureTemp import mesure_de_temperature
+import subprocess
 
 #====================================================================================================
 
@@ -88,13 +83,35 @@ labellogo.pack()
 
 #====================================================================================================
 
-def appel_graphique():
-    TEST.plot_graphs
+#Fonction  des graphiques et de la température
+
+def update_temperature_text():
+    try:
+        # Exécute la fonction mesure_de_temperature() dans un processus séparé
+        result = subprocess.run(['python', 'mesuretemperature.py', 'mesure_de_temperature'], capture_output=True, text=True)
+        temperature = result.stdout.strip()
+        temperature_text.configure(state='normal')
+        temperature_text.delete("1.0", tk.END)
+        temperature_text.insert(tk.END, temperature)
+        temperature_text.configure(state='disabled')
+    except subprocess.CalledProcessError:
+        # En cas d'erreur lors de l'exécution du processus
+        temperature_text.configure(state='normal')
+        temperature_text.delete("1.0", tk.END)
+        temperature_text.insert(tk.END, "Erreur de mesure")
+        temperature_text.configure(state='disabled')
+        
+def on_graph_button_click():
+    update_temperature_text()
+    
+temperature_text = tk.Text(window, height=1, width=10)
+temperature_text.pack()
+
 
 #====================================================================================================
 
-#open_powerpoint
-fonctionpowerpoint
+open_powerpoint
+
 
 #====================================================================================================
 
@@ -108,10 +125,10 @@ show_button1.pack()
 show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button2.pack()
 
-show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)",command=on_graph_button_click, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button3.pack()
 
-show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button4.pack()
 
 show_button5 = Button(frameGraphique5, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
@@ -123,7 +140,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=fonctionpowerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
