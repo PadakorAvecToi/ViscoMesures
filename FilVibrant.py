@@ -3,7 +3,7 @@ import serial
 import time
 
 # Paramètres de communication série
-port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM8'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
 baudrate = 9600  # Vitesse de communication en bauds
 
 try:
@@ -233,30 +233,36 @@ finally:
 import serial
 import time
 
+
 # Paramètres de communication série
-port = 'COM4'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+port = 'COM4'  # Remplacez par le nom du port série approprié (par exemple, '/dev/ttyUSB0' sous Linux)
 baudrate = 9600  # Vitesse de communication en bauds
+
 
 try:
     # Ouvrir la connexion série
     ser = serial.Serial(port, baudrate)
+
 
     # Récupérer le pas de fréquence actuel du détecteur synchrone
     commande = "SRAT?\r"  # Commande pour récupérer le pas de fréquence avec un retour chariot à la fin
     ser.write(commande.encode())  # Envoyer la commande encodée en bytes
     time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
 
+
     reponse = ""
     while True:
-        caractere = ser.read().decode()
-        if caractere == "\r":
+        caractere = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        if caractere == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
             break
-        reponse += caractere
+        reponse += caractere  # Ajouter le caractère à la réponse
+
 
     if reponse:
         print(f"Pas de fréquence actuel du détecteur synchrone : {reponse}")
     else:
         print("Aucune réponse du détecteur synchrone")
+
 
     # Modifier le pas de fréquence du détecteur synchrone
     nouveau_pas = 0.01  # Remplacez par le pas de fréquence souhaité (nombre flottant)
@@ -264,25 +270,35 @@ try:
     ser.write(commande.encode())  # Envoyer la commande encodée en bytes
     time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
 
+
     reponse = ""
     while True:
-        caractere = ser.read().decode()
-        if caractere == "\r":
+        caractere = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        if caractere == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
             break
-        reponse += caractere
+        reponse += caractere  # Ajouter le caractère à la réponse
+
 
     if reponse:
         print(f"Nouveau pas de fréquence du détecteur synchrone : {nouveau_pas}")
     else:
         print("Aucune réponse du détecteur synchrone")
 
+
 except serial.SerialException as e:
     print(f"Erreur de communication série : {e}")
+
 
 finally:
     # Fermer la connexion série
     if 'ser' in locals():
         ser.close()
+
+
+
+
+
+
 
 
 
