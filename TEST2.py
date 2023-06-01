@@ -27,7 +27,7 @@ def enregistrer_mesures_txt(mesures, fichier):
 
 
 # Exemple d'utilisation
-with open('Fichier/ametek air 480.945 etuve 20°.1C fil 0.1mm 0.06V dans cellule.txt', 'r') as f:
+with open('Fichier/releve.txt', 'r') as f:
             data = f.read().splitlines()
 mesures = data[1:]
 
