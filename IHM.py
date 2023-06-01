@@ -10,7 +10,6 @@ import tkinter as tk
 import serial
 import time
 from main import open_powerpoint
-from Essai import fonctionpowerpoint
 
 #====================================================================================================
 
@@ -88,13 +87,12 @@ labellogo.pack()
 
 #====================================================================================================
 
-def appel_graphique():
-    TEST.plot_graphs
+#Fonction  des graphiques et de la température
 
 #====================================================================================================
 
-#open_powerpoint
-fonctionpowerpoint
+open_powerpoint
+
 
 #====================================================================================================
 
@@ -108,10 +106,10 @@ show_button1.pack()
 show_button2 = Button(frameGraphique2, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button2.pack()
 
-show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button3 = Button(frameGraphique3, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button3.pack()
 
-show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", command=appel_graphique, bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
+show_button4 = Button(frameGraphique4, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button4.pack()
 
 show_button5 = Button(frameGraphique5, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
@@ -123,7 +121,7 @@ show_button6.pack()
 show_button7 = Button(frameGraphique7, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 14), width=BUTTON_WIDTH)
 show_button7.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=fonctionpowerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
