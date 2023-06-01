@@ -350,14 +350,14 @@ try:
     # Modifier le sens de balayage du détecteur synchrone
     nouveau_sens = input("Choisissez le sens de balayage (1 pour montant, 2 pour descendant) : ")
     if nouveau_sens == "1":
-        commande = "RSLP 1\r"  # Commande pour définir le sens de balayage à montant avec un retour chariot à la fin
+        commande2 = "RSLP 1\r"  # Commande pour définir le sens de balayage à montant avec un retour chariot à la fin
     elif nouveau_sens == "2":
-        commande = "RSLP 2\r"  # Commande pour définir le sens de balayage à descendant avec un retour chariot à la fin
+        commande2 = "RSLP 2\r"  # Commande pour définir le sens de balayage à descendant avec un retour chariot à la fin
     else:
         print("Choix invalide.")
         exit()
 
-    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    ser.write(commande2.encode())  # Envoyer la commande encodée en bytes
     time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
 
     reponse11 = ""
@@ -518,4 +518,258 @@ finally:
         ser.close()
 
 
+import serial
+import time
 
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer le le mode de numérisation actuel du détecteur synchrone
+    commande = "SEND?\r"  # Commande pour récupérer le mode de numérisation avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse16 = ""
+    while True:
+        caractere16 = ser.read().decode()
+        if caractere16 == "\r":
+            break
+        reponse16 += caractere16
+
+    if reponse16:
+        print(f"Mode de numérisation actuel du détecteur synchrone : {reponse16}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier le sens de balayage du détecteur synchrone
+    nouveau_mode = input("Choisissez le sens de balayage (1 pour montant, 2 pour descendant) : ")
+    if nouveau_mode == "1":
+        commande3 = "RSLP 1\r"  # Commande pour définir le sens de balayage à montant avec un retour chariot à la fin
+    elif nouveau_mode == "2":
+        commande3 = "RSLP 2\r"  # Commande pour définir le sens de balayage à descendant avec un retour chariot à la fin
+    else:
+        print("Choix invalide.")
+        exit()
+
+    ser.write(commande3.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse17 = ""
+    while True:
+        caractere17 = ser.read().decode()
+        if caractere17 == "\r":
+            break
+        reponse17 += caractere17
+
+    if reponse17:
+        print(f"Nouveau sens de balayage du détecteur synchrone : {reponse17}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+
+
+import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer le le mode de numérisation actuel du détecteur synchrone
+    commande = "FMOD?\r"  # Commande pour récupérer la source de référence avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse18 = ""
+    while True:
+        caractere18 = ser.read().decode()
+        if caractere18== "\r":
+            break
+        reponse18 += caractere18
+
+    if reponse18:
+        print(f"Mode de numérisation actuel du détecteur synchrone : {reponse18}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier la source de référence du détecteur synchrone
+    nouveau_sourcerefe = input("Choisissez le sens de balayage (1 pour interne, 2 pour balayage et 3 pour externe) : ")
+    if nouveau_sourcerefe == "1":
+        commande4 = "RSLP 1\r"  # Commande pour définir la source de référence  à montant avec un retour chariot à la fin
+    elif nouveau_sourcerefe == "2":
+        commande4 = "RSLP 2\r"  # Commande pour définir la source de référence à descendant avec un retour chariot à la fin
+    elif nouveau_sourcerefe == "3":
+        commande4 = "RSLP 3\r"  # Commande pour définir la source de référence à descendant avec un retour chariot à la fin
+    else:
+        print("Choix invalide.")
+        exit()
+
+    ser.write(commande4.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse19 = ""
+    while True:
+        caractere19 = ser.read().decode()
+        if caractere19 == "\r":
+            break
+        reponse19 += caractere19
+
+    if reponse19:
+        print(f"Nouveau mode de numérisation du détecteur synchrone : {reponse19}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+
+
+import serial
+import time
+
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom du port série approprié (par exemple, '/dev/ttyUSB0' sous Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+
+
+
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+
+    # Récupérer l'harmonique de détection actuel du détecteur synchrone
+    commande = "PHAS?\r"  # Commande pour récupérer le degrés de déphasage avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+
+    reponse20 = ""
+    while True:
+        caractere20 = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        if caractere20 == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+            break
+        reponse20 += caractere20  # Ajouter le caractère à la réponse
+
+
+    if reponse20:
+        print(f"Degrés de déphasage du détecteur synchrone : {reponse20}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+
+    # Modifier l'harmonique de détection du détecteur synchrone
+    nouveau_degrés = 0.000000  # Remplacez par le degrés de déphasage souhaité 
+    commande = f"PHAS {nouveau_degrés:.7f}\r"  # Commande pour modifier le degrés de déphasage avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+
+    reponse21 = ""
+    while True:
+        caractere21 = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        if caractere21 == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+            break
+        reponse21 += caractere21  # Ajouter le caractère à la réponse
+
+
+    if reponse21:
+        print(f"Nouvelle degrés de déphasage du détecteur synchrone : {nouveau_degrés}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+        
+        
+
+import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer le le mode de numérisation actuel du détecteur synchrone
+    commande = "SWPT?\r"  # Commande pour récupérer le type de balyage interne avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse22 = ""
+    while True:
+        caractere22 = ser.read().decode()
+        if caractere22 == "\r":
+            break
+        reponse22 += caractere22
+
+    if reponse22:
+        print(f"Mode de numérisation actuel du détecteur synchrone : {reponse22}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier le sens de balayage du détecteur synchrone
+    nouveau_typebalayage = input("Choisissez le type de balyage interne (0 pour linéaire , 1 pour logarithmique) : ")
+    if nouveau_typebalayage == "0":
+        commande5 = "SWPT 0\r"  # Commande pour définir le sens de balayage à montant avec un retour chariot à la fin
+    elif nouveau_typebalayage == "1":
+        commande5 = "SWPT 1\r"  # Commande pour définir le sens de balayage à descendant avec un retour chariot à la fin
+    else:
+        print("Choix invalide.")
+        exit()
+
+    ser.write(commande5.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(0.1)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+
+    reponse23 = ""
+    while True:
+        caractere23 = ser.read().decode()
+        if caractere23 == "\r":
+            break
+        reponse23 += caractere23
+
+    if reponse23:
+        print(f"Nouveau sens de balayage du détecteur synchrone : {reponse23}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
