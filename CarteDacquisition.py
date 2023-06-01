@@ -1,3 +1,4 @@
+#Fonction permettant la connexion et la reconnaisance automatique de mon Port COM
 import serial.tools.list_ports
 
 ports = serial.tools.list_ports.comports()
@@ -16,7 +17,6 @@ while not port_found:
             response = ser.readline().decode().strip()
             if response:
                 print(f"Port COM trouvé : {com_port}")
-                
                 port_found = True
                 break
             ser.close()
