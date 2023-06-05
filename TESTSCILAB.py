@@ -1,9 +1,12 @@
 import subprocess
 import tkinter as tk
 
+# Chemin d'accès à l'exécutable Scilab
+scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin\\WScilex.exe"
+
 # Fonction pour envoyer des commandes à Scilab et récupérer les résultats
 def send_scilab_command(command):
-    process = subprocess.Popen(['scilab', '-nw', '-nb', '-nogui'],
+    process = subprocess.Popen([scilab_path, '-nw', '-nb', '-nogui'],
                                stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE)
