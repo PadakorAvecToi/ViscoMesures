@@ -773,3 +773,229 @@ finally:
     # Fermer la connexion série
     if 'ser' in locals():
         ser.close()
+        
+        
+        
+        
+        import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer la fréquence actuelle du détecteur synchrone
+    commande = "ISRC?\r"  # Commande pour la configuration d'entrée avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse24 = ""
+    while True:
+        caractere24 = ser.read().decode()
+        if caractere24 == "\r":
+            break
+        reponse24 += caractere24
+
+    if reponse24:
+        print(f"Configuration d'entrée actuelle du détecteur synchrone : {reponse24}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier la fréquence de référence du détecteur synchrone
+    nouvelle_config = 1  # Remplacez par la configuration d'entrée souhaitée
+    commande = f"ISRC {nouvelle_config}\r"  # Commande pour modifier la configuration d'entrée avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse25 = ""
+    while True:
+        caractere25 = ser.read().decode()
+        if caractere25 == "\r":
+            break
+        reponse25 += caractere25
+
+    if reponse25:
+        print(f"Réponse du détecteur synchrone : {reponse25}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+        
+        
+        
+        
+        import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer la fréquence actuelle du détecteur synchrone
+    commande = "IGND?\r"  # Commande pour récuperer la grille de blindage d'entrée  avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse26= ""
+    while True:
+        caractere26 = ser.read().decode()
+        if caractere26 == "\r":
+            break
+        reponse26 += caractere26
+
+    if reponse26:
+        print(f"Grille de blindage d'entrée actuelle du détecteur synchrone : {reponse26}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier la fréquence de référence du détecteur synchrone
+    nouvelle_grille = 1  # Remplacez par la la grille de blindage d'entrée d'entrée souhaitée
+    commande = f"IGND {nouvelle_grille}\r"  # Commande pour modifier la la grille de blindage d'entrée avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse27 = ""
+    while True:
+        caractere27 = ser.read().decode()
+        if caractere27 == "\r":
+            break
+        reponse27 += caractere27
+
+    if reponse27:
+        print(f"Réponse du détecteur synchrone : {reponse27}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+        
+        
+        
+        
+import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer la fréquence actuelle du détecteur synchrone
+    commande = "ICPL?\r"  # Commande pour récuperer le couplage d'entrée  avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse28= ""
+    while True:
+        caractere28 = ser.read().decode()
+        if caractere28 == "\r":
+            break
+        reponse28 += caractere28
+
+    if reponse28:
+        print(f"Fréquence de démmarage actuelle du détecteur synchrone : {reponse28}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier la fréquence de référence du détecteur synchrone
+    nouveau_couplage = 0  # Remplacez par le couplage d'entrée souhaitée
+    commande = f"ICPL {nouveau_couplage}\r"  # Commande pour modifier le couplage d'entrée avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse29 = ""
+    while True:
+        caractere29 = ser.read().decode()
+        if caractere29 == "\r":
+            break
+        reponse29 += caractere29
+
+    if reponse29:
+        print(f"Réponse du détecteur synchrone : {reponse29}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
+        
+
+import serial
+import time
+
+# Paramètres de communication série
+port = 'COM9'  # Remplacez par le nom de port série approprié (ex: '/dev/ttyUSB0' sur Linux)
+baudrate = 9600  # Vitesse de communication en bauds
+
+try:
+    # Ouvrir la connexion série
+    ser = serial.Serial(port, baudrate)
+
+    # Récupérer la fréquence actuelle du détecteur synchrone
+    commande = "ILIN?\r"  # Commande pour récuperer les filtres d'encoche de ligne avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse30= ""
+    while True:
+        caractere30 = ser.read().decode()
+        if caractere30 == "\r":
+            break
+        reponse30 += caractere30
+
+    if reponse30:
+        print(f"Fréquence de démmarage actuelle du détecteur synchrone : {reponse30}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+    # Modifier la fréquence de référence du détecteur synchrone
+    nouveau_couplage = 2  # Remplacez par les filtres d'encoche de ligne  souhaitée
+    commande = f"ILIN {nouveau_couplage}\r"  # Commande pour modifier les filtres d'encoche de ligne  avec un retour chariot à la fin
+    ser.write(commande.encode())  # Envoyer la commande encodée en bytes
+    time.sleep(3.0)  # Attendre un court délai pour permettre au détecteur synchrone de répondre
+    
+    reponse31 = ""
+    while True:
+        caractere31 = ser.read().decode()
+        if caractere31 == "\r":
+            break
+        reponse31 += caractere31
+
+    if reponse31:
+        print(f"Réponse du détecteur synchrone : {reponse31}")
+    else:
+        print("Aucune réponse du détecteur synchrone")
+
+except serial.SerialException as e:
+    print(f"Erreur de communication série : {e}")
+
+finally:
+    # Fermer la connexion série
+    if 'ser' in locals():
+        ser.close()
