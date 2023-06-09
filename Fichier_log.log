@@ -140,3 +140,7 @@
 2023-06-05 13:11:30,567 WARNING: Un probleme peut survenir.
 2023-06-05 13:11:30,567 ERROR: Erreur la fonction correspondante ne fonctionne pas.
 2023-06-05 13:11:30,567 CRITICAL: Erreur critique du systeme.
+2023-06-08 15:10:36,597 INFO: Une action a ete effectuee.
+2023-06-08 15:10:36,597 WARNING: Un probleme peut survenir.
+2023-06-08 15:10:36,597 ERROR: Erreur la fonction correspondante ne fonctionne pas.
+2023-06-08 15:10:36,597 CRITICAL: Erreur critique du systeme.
