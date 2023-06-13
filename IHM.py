@@ -6,8 +6,7 @@ from PIL import ImageTk, Image
 import subprocess
 import Log
 from main import open_powerpoint
-from mesureTemp import mesure_de_temperature
-
+from Essai import test
 
 
 #====================================================================================================
@@ -76,11 +75,13 @@ labellogo.pack()
 
 #====================================================================================================
            
-#Code de l'etalonage    
+#Code de l'etalonage   
+def execute_test():
+    test()
 
 #====================================================================================================
 
-#Fonction  des graphiques et de la température
+#Fonction des graphiques
 
 #====================================================================================================
 
@@ -93,7 +94,7 @@ open_powerpoint
 BUTTON_WIDTH = 25
 BUTTON_HEIGHT = 3
 
-Button_etalonnage = Button(frameButtonEtalonnage, text="Etalonnage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_etalonnage = Button(frameButtonEtalonnage, text="Etalonnage", command=execute_test, bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_etalonnage.pack()
 
 
