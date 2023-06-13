@@ -15,11 +15,8 @@ from mesureTemp import mesure_de_temperature
 #fonction permettantr de mettre a jour le fichier log
 
 Log.setup_logger()
-Log.log_info('Une action a ete effectuee.')
-Log.log_warning('Un probleme peut survenir.')
 Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
-Log.log_debug('Ceci est le log de debug.')
-Log.log_critical('Erreur critique du systeme.')
+
 
 #Fonction pour gérer l'évènement "pression de la touche F11"
 def toggle_fullscreen(event: Event):
