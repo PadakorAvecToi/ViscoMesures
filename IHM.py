@@ -85,33 +85,9 @@ labellogo.pack()
 
 #Fonction  des graphiques et de la température
 
-def update_temperature_text():
-    try:
-        # Exécute la fonction mesure_de_temperature() dans un processus séparé
-        result = subprocess.run(['python', 'mesuretemperature.py', 'mesure_de_temperature'], capture_output=True, text=True)
-        temperature = result.stdout.strip()
-        temperature_text.configure(state='normal')
-        temperature_text.delete("1.0", tk.END)
-        temperature_text.insert(tk.END, temperature)
-        temperature_text.configure(state='disabled')
-    except subprocess.CalledProcessError:
-        # En cas d'erreur lors de l'exécution du processus
-        temperature_text.configure(state='normal')
-        temperature_text.delete("1.0", tk.END)
-        temperature_text.insert(tk.END, "Erreur de mesure")
-        temperature_text.configure(state='disabled')
-        
-def on_graph_button_click():
-    update_temperature_text()
-    
-temperature_text = tk.Text(window, height=1, width=10)
-temperature_text.pack()
-
-
 #====================================================================================================
 
 open_powerpoint
-
 
 #====================================================================================================
 
