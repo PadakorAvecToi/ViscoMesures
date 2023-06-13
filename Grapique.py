@@ -48,22 +48,22 @@ def plot_graphs():
         ax2.grid(True)
 
         # Modifier l'apparence de la grille
-        #ax1.grid(color='gray', linestyle='-', linewidth=0.7)
-        #ax2.grid(color='gray', linestyle='-', linewidth=0.7),
+        ax1.grid(color='gray', linestyle='-', linewidth=0.7)
+        ax2.grid(color='gray', linestyle='-', linewidth=0.7),
 
         # Ajouter une légende aux sous-graphiques
-        #ax1.legend(['Données réelles'], loc='upper right', fontsize=12)
-        #ax2.legend(['Données imaginaires'], loc='upper right', fontsize=12)
+        ax1.legend(['Données réelles'], loc='upper right', fontsize=12)
+        ax2.legend(['Données imaginaires'], loc='upper right', fontsize=12)
 
         # Modifier la couleur de fond de la figure
-        #fig.patch.set_facecolor('#233448')
+        fig.patch.set_facecolor('#233448')
 
         # Modifier les marges autour des sous-graphiques
         #plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05, wspace=0.4, hspace=0.4)
 
 
         # Modifier la taille de la fenêtre
-        #fig.set_size_inches(10, 6)
+        fig.set_size_inches(10, 6)
 
 
 
@@ -77,7 +77,10 @@ def plot_graphs():
         #fig.canvas.set_window_title('Banc de viscosité')
 
         # Modifier la couleur de la police affichée sur la fenêtre
-        #plt.rcParams['text.color'] = 'Yellow'
+        plt.rcParams['text.color'] = 'Yellow'
 
         # Afficher la fenêtre avec les deux graphiques
         plt.show()
+
+# Appeler la fonction pour afficher les graphiques
+plot_graphs()
