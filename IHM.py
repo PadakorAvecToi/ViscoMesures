@@ -94,8 +94,8 @@ def fonction_graphique2():
     graphique_numero2()
     
 #====================================================================================================
-
-open_powerpoint
+def manual():
+    open_powerpoint()
 
 #====================================================================================================
 
@@ -126,7 +126,7 @@ Button_Calibration.pack()
 Button_Visco = Button(frameButtonVisco, text="Visco", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_Visco.pack()
 
-buttonvisioneuse = Button(frameVision, text="?", command=open_powerpoint, bg="#233448", fg="#B1BD11", font=("Arial", 16))
+buttonvisioneuse = Button(frameVision, text="?", command=manual, bg="#233448", fg="#B1BD11", font=("Arial", 16))
 buttonvisioneuse.pack()
 
 #====================================================================================================
