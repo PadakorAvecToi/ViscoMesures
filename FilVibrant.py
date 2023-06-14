@@ -290,7 +290,7 @@ try:
     reponse9 = ""
     while True:
         caractere9 = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
-        if caractere9 == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+        if caractere9 == '\r':  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
             break
         reponse9 += caractere9  # Ajouter le caractère à la réponse
 

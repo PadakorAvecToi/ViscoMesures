@@ -13,7 +13,7 @@ def log_error(message, log_condition=True):
         logger.error(message)
 
         # Vérifier le nombre de lignes dans le fichier de journalisation
-        logfile = 'C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\Fichier_log.log'  # Remplacez par le chemin réel de votre fichier de journalisation
+        logfile = 'Fichier\\Fichier_log.log'  # Remplacez par le chemin réel de votre fichier de journalisation
         with open(logfile, 'r') as f:
             lines = f.readlines()
             num_lines = len(lines)

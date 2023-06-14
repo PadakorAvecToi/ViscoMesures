@@ -24,12 +24,21 @@ def envoyer_commande4(ser, commande):
 
 
 def recevoir_reponse(ser):
-    monreturn = ser.readlines().decode()
-    if monreturn == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+    reponse=""
+    while True:
+        caractere = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        print("caractere987")
+        if caractere == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+            reponse += "RC"
             print("RC")
-    print("monreturn = ")
-    print(monreturn)
-    return monreturn
+            break
+        #caractere = "a"
+        print(caractere)
+        reponse += caractere  # Ajouter le caractère à la réponse
+    print("reponse = ")
+    print(reponse)
+    #time.sleep(5.0)
+    return reponse
 
 
 ############################################
