@@ -8,7 +8,7 @@ scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin\\Scilex.exe"
 
 
 def test_command():
-    zizi = Tk()
+    root1 = Tk()
     # Chemin d'accès à l'exécutable Scilab
     scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin"
 
@@ -39,23 +39,23 @@ def test_command():
     
 
     # Création de la zone de texte pour entrer la commande Scilab
-    command_label = tk.Label(zizi, text="Commande Scilab :")
+    command_label = tk.Label(root1, text="Commande Scilab :")
     command_label.pack()
-    command_entry = tk.Entry(zizi, width=50)
+    command_entry = tk.Entry(root1, width=50)
     command_entry.pack()
 
     # Création du bouton pour exécuter la commande
-    execute_button = tk.Button(zizi, text="Exécuter", command=execute_scilab_command)
+    execute_button = tk.Button (root1, text="Exécuter", command=execute_scilab_command)
     execute_button.pack()
 
     # Création de la zone de texte pour afficher le résultat
-    result_label = tk.Label(zizi, text="Résultat :")
+    result_label = tk.Label(root1, text="Résultat :")
     result_label.pack()
-    result_text = tk.Text(zizi, width=50, height=10)
+    result_text = tk.Text(root1, width=50, height=10)
     result_text.configure(state='disabled')
     result_text.pack()
-    zizi.title("Interface de contrôle Scilab")
-    zizi.mainloop()
+    root1.title("Interface de contrôle Scilab")
+    root1.mainloop()
 
 # Lancement de la boucle principale de l'interface graphique
 
