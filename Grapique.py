@@ -59,7 +59,7 @@ def test_graph1():
 
         # Créer une fenêtre Tkinter
         root = tk.Tk()
-        root.title('Banc de viscosité')
+        root.title("Graphe X,Y = f(Freq)")
 
         # Changer l'icône de la fenêtre
         root.iconbitmap("Image/uppa.ico")
