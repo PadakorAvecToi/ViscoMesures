@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import Event
 from PIL import ImageTk, Image
 import subprocess
+import threading
 import Log
 from main import open_powerpoint
-from Essai import test
 from TESTSCILAB import test_command
 from mesureTemp import label_temperature
 from Grapique import test_graph1
@@ -85,12 +85,21 @@ def execute_test():
 #====================================================================================================
 
 #Fonction des graphiques
-
-def ta_race():
+def fonction_commande():
     test_command()
     
-def affichage_graph1():
+def fonction_graphique1():
     test_graph1()
+    
+def lancer_fonctions():
+    # Création des threads pour lancer les fonctions simultanément
+    thread1 = threading.Thread(target=fonction_commande)
+    thread2 = threading.Thread(target=fonction_graphique1)
+
+    # Lancement des threads
+    thread1.start()
+    thread2.start()
+    
 #====================================================================================================
 
 open_powerpoint
@@ -109,10 +118,10 @@ Button_etalonnage.pack()
 Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_ConfigBalayage.pack()
 
-Button_graph1 = Button(frameButtonGraphique1, command=ta_race, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph1 = Button(frameButtonGraphique1, command=lancer_fonctions, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph1.pack()
 
-Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", command=affichage_graph1, bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph2.pack()
 
 Button_delta0 = Button(frameButtonDelta0, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
@@ -131,8 +140,10 @@ buttonvisioneuse.pack()
 
 # modifications de la fenêtre
 window.title("Banc de Viscosité")
-window.geometry("1920x1080")
-window.minsize(1080, 720)
+largeur_ecran = window.winfo_screenwidth()
+hauteur_ecran = window.winfo_screenheight()
+window.geometry(f"{largeur_ecran}x{hauteur_ecran}")
+window.minsize(largeur_ecran, hauteur_ecran)
 window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
 window.attributes('-fullscreen', False)

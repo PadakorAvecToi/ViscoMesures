@@ -74,9 +74,6 @@ def test_graph1():
         root_x = int((screen_width - root_width) / 2)
         root_y = int((screen_height - root_height) / 2)
 
-        # Définir les dimensions et la position de la fenêtre
-        root.geometry(f"{root_width}x{root_height}+{root_x}+{root_y}")
-
         # Créer un widget Canvas Tkinter pour afficher la figure
         canvas = FigureCanvasTkAgg(fig, master=root)
         canvas.draw()
