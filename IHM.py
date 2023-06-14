@@ -9,6 +9,7 @@ from main import open_powerpoint
 from Essai import test
 from TESTSCILAB import test_command
 from mesureTemp import label_temperature
+from Grapique import test_graph1
 
 
 #====================================================================================================
@@ -87,6 +88,9 @@ def execute_test():
 
 def ta_race():
     test_command()
+    
+def affichage_graph1():
+    test_graph1()
 #====================================================================================================
 
 open_powerpoint
@@ -108,7 +112,7 @@ Button_ConfigBalayage.pack()
 Button_graph1 = Button(frameButtonGraphique1, command=ta_race, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph1.pack()
 
-Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", command=affichage_graph1, bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph2.pack()
 
 Button_delta0 = Button(frameButtonDelta0, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
