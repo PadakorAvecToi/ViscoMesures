@@ -7,6 +7,8 @@ import subprocess
 import Log
 from main import open_powerpoint
 from Essai import test
+from TESTSCILAB import test_command
+
 
 
 #====================================================================================================
@@ -83,6 +85,9 @@ def execute_test():
 
 #Fonction des graphiques
 
+def ta_race():
+    test_command()
+
 #====================================================================================================
 
 open_powerpoint
@@ -101,7 +106,7 @@ Button_etalonnage.pack()
 Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_ConfigBalayage.pack()
 
-Button_graph1 = Button(frameButtonGraphique1, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph1 = Button(frameButtonGraphique1, command=ta_race, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph1.pack()
 
 Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
@@ -127,7 +132,7 @@ window.geometry("1920x1080")
 window.minsize(1080, 720)
 window.iconbitmap("Image/uppa.ico")
 window.config(background="#304562")
-window.attributes('-fullscreen', True)
+window.attributes('-fullscreen', False)
 window.bind('<F11>', toggle_fullscreen)
 
 #====================================================================================================
