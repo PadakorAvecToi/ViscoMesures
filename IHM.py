@@ -8,7 +8,7 @@ import Log
 from main import open_powerpoint
 from Essai import test
 from TESTSCILAB import test_command
-
+from mesureTemp import label_temperature
 
 
 #====================================================================================================
@@ -79,7 +79,7 @@ labellogo.pack()
            
 #Code de l'etalonage   
 def execute_test():
-    test()
+    label_temperature()
 
 #====================================================================================================
 
@@ -87,7 +87,6 @@ def execute_test():
 
 def ta_race():
     test_command()
-
 #====================================================================================================
 
 open_powerpoint
