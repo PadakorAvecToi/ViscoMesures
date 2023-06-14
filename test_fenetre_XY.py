@@ -1,9 +1,26 @@
+import matplotlib.pyplot as plt
+import numpy as np
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import matplotlib.pyplot as plt
+import nidaqmx
+import nidaqmx.constants
+
+def adjust_window_size(root):
+    # Obtenir les dimensions de l'écran
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
+    # Définir les dimensions de la fenêtre en fonction de l'écran
+    root_width = int(screen_width * 0.8)
+    root_height = int(screen_height * 0.8)
+    root_x = int((screen_width - root_width) / 2)
+    root_y = int((screen_height - root_height) / 2)
+
+    # Définir les dimensions et la position de la fenêtre
+    root.geometry(f"{root_width}x{root_height}+{root_x}+{root_y}")
 
 
-def plot_graphs():
+def plot_graphs(root):
     # Ouvrez le fichier TXT contenant les données
     with open('Fichier/releve.txt', 'r') as f:
         data = f.read().splitlines()
@@ -24,14 +41,13 @@ def plot_graphs():
         z.append(float(split_line[2]))
 
     # Créez une figure avec deux sous-graphiques
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 10), sharex=True)
 
     # Tracez les données dans les sous-graphiques correspondants
     ax1.plot(x, y, color='blue', linewidth=2)
     ax2.plot(w, z, color='red', linewidth=2)
 
     # Ajoutez des étiquettes pour les axes X et Y et un titre pour chaque sous-graphique
-    ax1.set_xlabel("Axe X", fontsize=12, color='yellow')
     ax1.set_ylabel("Axe Y", fontsize=12, color='yellow')
     ax1.set_title("Graphique Réel", fontsize=14, color='yellow')
     ax2.set_xlabel("Axe X", fontsize=12, color='yellow')
@@ -53,59 +69,13 @@ def plot_graphs():
     # Modifier la couleur de fond de la figure
     fig.patch.set_facecolor('#304562')
 
-    # Créer une fenêtre Tkinter
-    root = tk.Tk()
-    root.title('Banc de viscosité')
-
-    # Changer l'icône de la fenêtre
-    root.iconbitmap("Image/uppa.ico")
-
-    # Obtenir les dimensions de l'écran
-    screen_width = root.winfo_screenwidth()
-    screen_height = root.winfo_screenheight()
-
-    # Définir les dimensions de la fenêtre en fonction de l'écran
-    root_width = int(screen_width * 0.8)
-    root_height = int(screen_height * 0.8)
-    root_x = int((screen_width - root_width) / 2)
-    root_y = int((screen_height - root_height) / 2)
-
     # Créer un widget Canvas Tkinter pour afficher la figure
     canvas = FigureCanvasTkAgg(fig, master=root)
-    canvas.draw()
+    canvas.get_tk_widget().grid(row=0, column=0, rowspan=2, padx=10, pady=10, sticky='nsew')
 
-    # Modifier la couleur de fond de la fenêtre Tkinter
-    root.configure(bg='#304562')
-
-    # Fonction de redimensionnement des graphiques en fonction de la taille de la fenêtre
-    def resize_graphs(event):
-        # Récupérer la taille de la fenêtre
-        width = event.width
-        height = event.height
-
-        # Calculer la nouvelle taille des graphiques en fonction de la taille de la fenêtre
-        figsize = (width / 100, height / 100)  # Ajustez les valeurs selon vos besoins
-
-        # Mettre à jour la taille des graphiques
-        fig.set_size_inches(figsize)
-        fig.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)  # Ajuster les marges selon vos besoins
-        canvas.draw()
-
-    # Lier la fonction de redimensionnement à l'événement de redimensionnement de la fenêtre
-    root.bind('<Configure>', resize_graphs)
-
-    # Créer une étiquette pour le titre
-    title_label = tk.Label(root, text='Banc de viscosité', font=('Arial', 16), fg='yellow', bg='#233448')
-    title_label.pack(pady=10)
-
-    # Afficher le widget Canvas
-    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-
-    # Appeler la fonction pour afficher le tableau
-    display_table(root)
-
-    # Lancer la boucle principale Tkinter
-    tk.mainloop()
+    # Redimensionner le widget Canvas en fonction de la taille de la fenêtre
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
 
 
 def display_table(root):
@@ -115,7 +85,7 @@ def display_table(root):
 
     # Créer un widget de tableau Tkinter
     table = tk.LabelFrame(root, text='Tableau')
-    table.pack(padx=10, pady=10)
+    table.grid(row=0, column=1, padx=10, pady=10, sticky='nsew')
 
     # Parcourir les lignes du fichier texte
     for i, line in enumerate(lines):
@@ -127,6 +97,60 @@ def display_table(root):
             label = tk.Label(table, text=value, relief='solid', width=12)
             label.grid(row=i, column=j, padx=5, pady=5)
 
+    # Redimensionner le widget de tableau en fonction de la taille de la fenêtre
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(1, weight=1)
 
-# Appeler la fonction pour afficher les graphiques
-plot_graphs()
+
+def update_temperature_label(label, task):
+    try:
+        voltage = task.read()
+        temperature = 20 + (voltage * 4)
+        arrondi = "{:.1f}".format(temperature)
+        label.config(text="Température mesurée: " + arrondi)
+    except nidaqmx.DaqError:
+        label.config(text="Erreur de lecture de la température")
+
+    label.after(10000, lambda: update_temperature_label(label, task))
+
+
+# Création d'une instance du périphérique d'acquisition de données
+with nidaqmx.Task() as task:
+    # Configuration du canal d'entrée analogique
+    min_val = 0  # Définition de la valeur minimale de mesure
+    max_val = 10  # Définition de la valeur maximale de mesure
+
+    task.ai_channels.add_ai_voltage_chan(
+        "Dev1/ai0",
+        terminal_config=nidaqmx.constants.TerminalConfiguration.RSE,
+        min_val=min_val,
+        max_val=max_val,
+        units=nidaqmx.constants.VoltageUnits.VOLTS
+    )
+
+    # Création de la fenêtre Tkinter
+    root = tk.Tk()
+    root.title('Banc de viscosité')
+    root.config(background="#304562")
+
+    # Changer l'icône de la fenêtre
+    root.iconbitmap("Image/uppa.ico")
+
+    # Ajuster la taille de la fenêtre en fonction de l'écran
+    adjust_window_size(root)
+
+    # Créer l'étiquette pour la température
+    temperature_label = tk.Label(root, text="Température mesurée: ")
+    temperature_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+
+    # Lancer la mise à jour de la température
+    update_temperature_label(temperature_label, task)
+
+    # Afficher les graphiques
+    plot_graphs(root)
+
+    # Afficher le tableau
+    display_table(root)
+
+    # Démarrer la boucle principale Tkinter
+    root.mainloop()
