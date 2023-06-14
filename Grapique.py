@@ -36,10 +36,10 @@ def test_graph1():
         # Ajoutez des étiquettes pour les axes X et Y et un titre pour chaque sous-graphique
         ax1.set_xlabel("Axe X", fontsize=12, color='yellow')
         ax1.set_ylabel("Axe Y", fontsize=12, color='yellow')
-        ax1.set_title("Graphique Réel", fontsize=14, color='yellow')
+        ax1.set_title("Partie Réele", fontsize=14, color='yellow')
         ax2.set_xlabel("Axe X", fontsize=12, color='yellow')
         ax2.set_ylabel("Axe Y", fontsize=12, color='yellow')
-        ax2.set_title("Graphique Imaginaire", fontsize=14, color='yellow')
+        ax2.set_title("Partie Imaginaire", fontsize=14, color='yellow')
 
         # Ajouter une grille aux sous-graphiques
         ax1.grid(True)
