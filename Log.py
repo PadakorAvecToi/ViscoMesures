@@ -3,7 +3,7 @@ import os
 
 
 def setup_logger():
-    log_dir = "Fichiers"
+    log_dir = "Fichier"
     log_file = os.path.join(log_dir, "Fichier_log.log")
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 
