@@ -5,7 +5,7 @@ from tkinter import Event
 from PIL import ImageTk, Image
 import subprocess
 import threading
-import Log
+#import Log
 from main import open_powerpoint
 from TESTSCILAB import test_command
 from mesureTemp import label_temperature
@@ -16,8 +16,8 @@ from Grapique import test_graph1
 
 #fonction permettantr de mettre a jour le fichier log
 
-Log.setup_logger()
-Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+#Log.setup_logger()
+#Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
 
 
 #Fonction pour gérer l'évènement "pression de la touche F11"
@@ -85,21 +85,11 @@ def execute_test():
 #====================================================================================================
 
 #Fonction des graphiques
-def fonction_commande():
-    test_command()
+#def fonction_commande():
+    #test_command()
     
 def fonction_graphique1():
     test_graph1()
-    
-def lancer_fonctions():
-    # Création des threads pour lancer les fonctions simultanément
-    thread1 = threading.Thread(target=fonction_commande)
-    thread2 = threading.Thread(target=fonction_graphique1)
-
-    # Lancement des threads
-    thread1.start()
-    thread2.start()
-    
 #====================================================================================================
 
 open_powerpoint
@@ -118,7 +108,7 @@ Button_etalonnage.pack()
 Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_ConfigBalayage.pack()
 
-Button_graph1 = Button(frameButtonGraphique1, command=lancer_fonctions, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph1 = Button(frameButtonGraphique1, command=fonction_graphique1, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph1.pack()
 
 Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
