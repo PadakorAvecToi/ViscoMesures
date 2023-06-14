@@ -2,9 +2,12 @@ import win32com.client
 from tkinter import messagebox
 import Log
 
+Log.setup_logger()
+Log.log_error('Erreur la fonction correspondante ne fonctionne pas.')
+
 def open_powerpoint():
     # Chemin d'accès et nom de fichier PowerPoint
-    powerpoint_file = r"C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\test.pptx"
+    powerpoint_file = r"Fichier\\test.pptx"
 
     try:
         # Créer une instance de PowerPoint
