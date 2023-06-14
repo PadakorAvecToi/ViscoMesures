@@ -1,16 +1,11 @@
 import logging
+import os
+
 
 def setup_logger():
-    logging.basicConfig(filename='Fichier_log.log', level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
-
-def log_debug(message):
-    logging.debug(message)
-
-def log_info(message):
-    logging.info(message)
-
-def log_warning(message):
-    logging.warning(message)
+    log_dir = "Fichiers"
+    log_file = os.path.join(log_dir, "Fichier_log.log")
+    logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 
 def log_error(message, log_condition=True):
     if log_condition:
@@ -18,7 +13,7 @@ def log_error(message, log_condition=True):
         logger.error(message)
 
         # Vérifier le nombre de lignes dans le fichier de journalisation
-        logfile = 'C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier_log.log'  # Remplacez par le chemin réel de votre fichier de journalisation
+        logfile = 'C:\\Users\\letra\\Documents\\GitHub\\ViscoMesures\\Fichier\\Fichier_log.log'  # Remplacez par le chemin réel de votre fichier de journalisation
         with open(logfile, 'r') as f:
             lines = f.readlines()
             num_lines = len(lines)
@@ -27,6 +22,3 @@ def log_error(message, log_condition=True):
         if num_lines >= 500:
             with open(logfile, 'w'):
                 pass
-
-def log_critical(message):
-    logging.critical(message)
