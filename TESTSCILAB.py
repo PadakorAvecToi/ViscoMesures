@@ -4,13 +4,13 @@ from tkinter import *
 
 
 # Chemin d'accès à l'exécutable Scilab
-scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin\\Scilex.exe"
+#scilab_path = "C:\\Program Files\\scilab-6.1.1\\bin\\Scilex.exe"
 
 
 def test_command():
     root1 = Tk()
     # Chemin d'accès à l'exécutable Scilab
-    scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin"
+    scilab_path = "C:\\Program Files\\scilab-6.1.1\\bin\\Scilex.exe"
 
     # Fonction pour envoyer des commandes à Scilab et récupérer les résultats
     def send_scilab_command(command):
