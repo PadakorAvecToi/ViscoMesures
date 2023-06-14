@@ -1,76 +1,136 @@
-import xml.etree.ElementTree as ET #Importe le module xml.etree.ElementTree sous le nom ET pour travailler avec des fichiers XML.
-import tkinter as tk #Importe le module tkinter pour créer une interface graphique.
-from tkinter import filedialog #Importe la fonction filedialog du module tkinter pour ouvrir une boîte de dialogue de sauvegarde de fichier.
-from FilVibrant import reponse   #Importe des fonctions depuis le module FilVibrant. Les fonctions spécifiques importées sont reponse, nouvelle_tension, nouvelle_frequence1, nouveau_pas, nouvelle_frequence2, et nouveau_sens.
-from FilVibrant import nouvelle_tension
-from FilVibrant import nouvelle_frequence1
-from FilVibrant import nouveau_pas
-from FilVibrant import nouvelle_frequence2
-from FilVibrant import nouveau_sens
+import xml.etree.ElementTree as ET #manipulation des fichier XML
+import tkinter as tk #interface graphique
+from tkinter import filedialog #manipulation de l'explorateur de fichier 
+import serial #communication série
+import time #pauses 
+
+
+
+
+def envoyer_commande1(ser, commande):
+    ser.write(commande.encode())
+    #fonction qui permet d'envoyer une commande au détecteur synchrone
+
+def envoyer_commande2(ser, commande):
+    ser.write(commande.encode())
+
+def envoyer_commande3(ser, commande):
+    ser.write(commande.encode())
+
+def envoyer_commande4(ser, commande):
+    ser.write(commande.encode())
+
+
+
+
+
+def recevoir_reponse(ser):
+    reponse="" #variable pour stocker la réponse
+    while True:
+        caractere = ser.read().decode()  # Lire un caractère depuis le port série et le décoder en une chaîne de caractères
+        if caractere == "\r":  # Si le caractère est un retour chariot ("\r"), sortir de la boucle
+            reponse += "RC" #ajouter RC a notre réponse
+            print("RC") #on affiche RC à l'écran
+            break #instruction pour quitter la boucle
+        print(caractere)#on affiche caractére
+        reponse += caractere  # Ajouter le caractère à la réponse
+    print("reponse = ") #on affiche la réponse compléte
+    print(reponse)
+    #time.sleep(5.0)
+    return reponse
+
+
+############################################
+
+def demander_pas_frequence(ser):
+    print("SRAT") #afficher la commande que l'on envoie
+    #time.sleep(5.0)
+    envoyer_commande1(ser, "SRAT?\r") #on envoie la commande au détecteur
+    #time.sleep(5.0)
+    return recevoir_reponse(ser) #on retourne la réponse 
+
+def demander_freq_demarrage(ser):
+    print("SLLM")
+    envoyer_commande2(ser, "SLLM?\r")
+    #time.sleep(5.0)
+    return recevoir_reponse(ser)
+
+
+def demander_freq_arret(ser):
+    print("SULM")
+    envoyer_commande3(ser, "SULM?\r")
+    #time.sleep(5.0)
+    return recevoir_reponse(ser)
+
+
+def demander_sens_balayage(ser):
+    print("RSLP")
+    envoyer_commande4(ser, "RSLP?\r")
+    time.sleep(5.0)
+    return recevoir_reponse(ser)
+
+
+def demander_informations_detecteur():####################################################################################
+    ser = serial.Serial('COM9', 9600) #ouvrir la connexipn série
+    pas_frequence = demander_pas_frequence(ser) #appelle des fonctions pour récuperer les informations du détecteur 
+    freq_demarrage = demander_freq_demarrage(ser)
+    freq_arret = demander_freq_arret(ser)
+    sens_balayage = demander_sens_balayage(ser)
+    ser.close() #fin de la connexion série
+    return pas_frequence, freq_demarrage, freq_arret, sens_balayage #on retourne les informations
+
+
 
 
 def sauvegarder_configuration():
-    # Créer l'élément racine du fichier XML
+    #Cette fonction sauvegarder_configuration appelle la fonction demander_informations_detecteur pour obtenir 
+    # les informations du détecteur. Ensuite, elle crée un élément racine "configuration" pour le fichier XML et ajoute des 
+    # sous-éléments correspondant aux paramètres de configuration. 
+
+
+    pas_frequence, freq_demarrage, freq_arret, sens_balayage = demander_informations_detecteur()
     root = ET.Element("configuration")
-
-
-    # Récupérer les valeurs de configuration définies précédemment
-    frequence_demarrage = nouvelle_frequence1  
-    frequence_arret = nouvelle_frequence2  
-    pas_frequence = nouveau_pas  
-    sens_balayage = nouveau_sens  
-    #Affecte les valeurs des variables en utilisant les fonctions importées depuis le module FilVibrant.
-
-
-    # Créer les éléments correspondant aux paramètres de configuration
-    freq_demarrage_elem = ET.SubElement(root, "frequence_demarrage")
-    freq_demarrage_elem.text = frequence_demarrage
-    #Crée un sous-élément <frequence_demarrage> sous l'élément racine root et lui attribue la valeur de frequence_demarrage.
-
-    freq_arret_elem = ET.SubElement(root, "frequence_arret")
-    freq_arret_elem.text = frequence_arret
-
-
     pas_freq_elem = ET.SubElement(root, "pas_frequence")
     pas_freq_elem.text = pas_frequence
-
-
+    freq_demarrage_elem = ET.SubElement(root, "frequence_demarrage")
+    freq_demarrage_elem.text = freq_demarrage
+    freq_arret_elem = ET.SubElement(root, "frequence_arret")
+    freq_arret_elem.text = freq_arret
     sens_balayage_elem = ET.SubElement(root, "sens_balayage")
     sens_balayage_elem.text = sens_balayage
-
-
-    # Créer l'arbre XML ,Crée un objet ElementTree à partir de l'élément racine root.
     tree = ET.ElementTree(root)
-
-
-    # Demander à l'utilisateur de choisir le nom et l'emplacement du fichier
-    root = tk.Tk()
-    root.withdraw()
+    #Ensuite, elle crée un objet ElementTree à partir de l'élément racine et demande à l'utilisateur de choisir le nom 
+    # et l'emplacement du fichier XML de sauvegarde. Si un fichier est sélectionné, la configuration est écrite dans le 
+    # fichier XML et un message de succès est affiché. Sinon, un message d'annulation est affiché.
+    root = tk.Tk() #root = tk.Tk(): Cette ligne crée une instance de la classe Tk dans la variable root, qui représente la fenêtre 
+    #principale de l'application.
+    root.withdraw() #Cette ligne masque la fenêtre principale, ce qui signifie qu'elle ne sera pas affichée à l'écran
     fichier_config = filedialog.asksaveasfilename(defaultextension=".xml", filetypes=[("Fichier XML", "*.xml")])
+    #Cette ligne affiche une boîte de dialogue de sauvegarde de fichier. L'argument defaultextension=".
+    # xml" spécifie que si l'utilisateur ne fournit pas d'extension de fichier, l'extension .xml sera automatiquement ajoutée.
+    if fichier_config: #Cette condition vérifie si l'utilisateur a sélectionné un emplacement et un nom de fichier 
+        #valide dans la boîte de dialogue.
+        tree.write(fichier_config) #Si un fichier valide a été sélectionné, cette ligne enregistre l'arbre XML (tree) dans le fichier 
+        #spécifié par fichier_config.
 
-
-    # Enregistrer le fichier XML , Crée une fenêtre Tkinter et la masque pour l'utilisateur.
-    #Ouvre une boîte de dialogue pour enregistrer le fichier, avec une extension .xml par défaut et en limitant
-    # les types de fichiers à des fichiers XML.
-
-
-
-    if fichier_config:
-        tree.write(fichier_config)
         print("Configuration sauvegardée avec succès dans le fichier", fichier_config)
     else:
         print("Annulation de la sauvegarde de la configuration")
 
 
 
-
-# Appeler la fonction pour sauvegarder la configuration
-sauvegarder_configuration()
+sauvegarder_configuration() #appelle de la fonction pour sauvegarder la configuration du détecteur 
 
 
 
 
 
+
+
+
+
+
+'''
 from asyncore import read
 import xml.etree.ElementTree as ET
 
@@ -109,7 +169,4 @@ fichier_txt = "mesures.txt"
 
 enregistrer_mesures_xml(mesures, fichier_xml)
 enregistrer_mesures_txt(mesures, fichier_txt)
-
-import serial
-import time
-import xml.etree.ElementTree
+'''
