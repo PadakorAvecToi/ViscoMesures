@@ -3,6 +3,9 @@ import tkinter as tk
 from tkinter import *
 
 
+# Chemin d'accès à l'exécutable Scilab
+scilab_path = "C:\\Program Files\\scilab-5.5.2\\bin\\Scilex.exe"
+
 
 def test_command():
     zizi = Tk()
