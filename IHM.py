@@ -91,15 +91,6 @@ def fonction_commande():
 def fonction_graphique1():
     test_graph1()
     
-def lancer_fonctions():
-    # Création des threads pour lancer les fonctions simultanément
-    thread1 = threading.Thread(target=fonction_commande)
-    thread2 = threading.Thread(target=fonction_graphique1)
-
-    # Lancement des threads
-    thread1.start()
-    thread2.start()
-    
 #====================================================================================================
 
 open_powerpoint
@@ -118,10 +109,10 @@ Button_etalonnage.pack()
 Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_ConfigBalayage.pack()
 
-Button_graph1 = Button(frameButtonGraphique1, command=lancer_fonctions, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph1 = Button(frameButtonGraphique1, command=fonction_graphique1, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph1.pack()
 
-Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_graph2 = Button(frameButtonGraphique2, text="Graphe Xexp et Yexp = f(Freq)", command=fonction_commande, bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_graph2.pack()
 
 Button_delta0 = Button(frameButtonDelta0, text="Delta0 par vide", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
