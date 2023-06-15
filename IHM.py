@@ -108,7 +108,7 @@ Button_etalonnage = Button(frameButtonEtalonnage, text="Etalonnage", command=exe
 Button_etalonnage.pack()
 
 
-Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+Button_ConfigBalayage = Button(frameButtonBalayage, text="Configuration balayage", command=test_command, bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 Button_ConfigBalayage.pack()
 
 Button_graph1 = Button(frameButtonGraphique1, command=fonction_graphique1, text="Graphe X,Y = f(Freq)", bg="#233448", fg="#B1BD11", font=("Arial", 16), width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
