@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import ImageTk, Image
